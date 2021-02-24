@@ -53,9 +53,11 @@ Team Google annotated VWXYZ sentences for Milestone 1.
 
 ### Papers
 
-- A
-- B
-- C
+- Balyan, R., McCarthy, K. S., & McNamara, D. S. (2018). Comparing Machine Learning Classification Approaches for Predicting Expository Text Difficulty. In Grantee Submission. https://eric.ed.gov/?id=ED585216
+- Balyan, R., McCarthy, K. S., & McNamara, D. S. (2020). Applying Natural Language Processing and Hierarchical Machine Learning Approaches to Text Difficulty Classification. International Journal of Artificial Intelligence in Education, 30(3), 337‑370. https://doi.org/10.1007/s40593-020-00201-7
+- Collins, E., Rozanov, N., & Zhang, B. (2018). Evolutionary Data Measures : Understanding the Difficulty of Text Classification Tasks. arXiv:1811.01910 [cs]. http://arxiv.org/abs/1811.01910
+- Filighera, A., Steuer, T., & Rensing, C. (2019). Automatic Text Difficulty Estimation Using Embeddings and Neural Networks. In M. Scheffel, J. Broisin, V. Pammer-Schindler, A. Ioannou, & J. Schneider (Éds.), Transforming Learning with Meaningful Technologies (p. 335‑348). Springer International Publishing. https://doi.org/10.1007/978-3-030-29736-7_25
+- Miltsakaki, E., & Troutt, A. (2008). Real Time Web Text Classification and Analysis of Reading Difficulty. Proceedings of the Third Workshop on Innovative Use of NLP for Building Educational Applications, 89‑97. https://www.aclweb.org/anthology/W08-0911
 
 ### Existing datasets found
 
