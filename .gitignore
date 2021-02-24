@@ -128,3 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .vscode/settings.json
+documents/bibliography/.DS_Store
+documents/.DS_Store
+documents/.DS_Store
