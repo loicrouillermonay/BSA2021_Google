@@ -7,11 +7,11 @@
 ## Table of Contents
 
 1. Introduction
-2. Title
+2. Methodology
 3. Bibliographie
 
 ## 1. Introduction
 
-## 2. Title
+## 2. Methodology
 
-## 3. Bibliographie
+## 3. Bibliography
