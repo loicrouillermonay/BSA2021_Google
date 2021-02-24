@@ -53,12 +53,18 @@ Team Google annotated VWXYZ sentences for Milestone 1.
 
 ### Papers
 
-_Lorem ipsum dolor sit amet, consectetur adipiscing elit._
+- A
+- B
+- C
 
 ### Links to the relevant datasets found
 
-_Lorem ipsum dolor sit amet, consectetur adipiscing elit._
+- A
+- B
+- C
 
 ### Links to source of texts
 
-_Lorem ipsum dolor sit amet, consectetur adipiscing elit._
+- A
+- B
+- C
