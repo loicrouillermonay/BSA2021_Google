@@ -1,3 +1,17 @@
-# BSA2021_Google
+# Big-Scale Analytics 2021 - Team Google
 
-Project - Big-Scale Analytics
+- Francis Ruckstuhl (16-821-738)
+- David Netter ()
+- Loïc Rouiller-Monay (16-832-453)
+
+## Table of Contents
+
+1. Introduction
+2. Title
+3. Bibliographie
+
+## 1. Introduction
+
+## 2. Title
+
+## 3. Bibliographie
