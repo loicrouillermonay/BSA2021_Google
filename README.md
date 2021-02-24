@@ -7,11 +7,15 @@
 ## Table of Contents
 
 1. Introduction
-2. Methodology
+2. Our approach
 3. Bibliographie
 
 ## 1. Introduction
 
-## 2. Methodology
+### The premise of the project
+
+### Goal
+
+## 2. Our approach
 
 ## 3. Bibliography
