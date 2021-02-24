@@ -43,6 +43,8 @@ Secondly, we apply our data collection strategy.
 
 ## 2. Approach to solve the problem
 
+_Lorem ipsum dolor sit amet, consectetur adipiscing elit._
+
 ## 3. Contribution
 
 Team Google annotated VWXYZ sentences for Milestone 1.
@@ -51,6 +53,12 @@ Team Google annotated VWXYZ sentences for Milestone 1.
 
 ### Papers
 
+_Lorem ipsum dolor sit amet, consectetur adipiscing elit._
+
 ### Links to the relevant datasets found
 
+_Lorem ipsum dolor sit amet, consectetur adipiscing elit._
+
 ### Links to source of texts
+
+_Lorem ipsum dolor sit amet, consectetur adipiscing elit._
