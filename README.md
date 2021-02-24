@@ -57,13 +57,13 @@ Team Google annotated VWXYZ sentences for Milestone 1.
 - B
 - C
 
-### Links to the relevant datasets found
+### Existing datasets found
 
 - A
 - B
 - C
 
-### Links to source of texts
+### Sources of text data
 
 - A
 - B
