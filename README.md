@@ -1,7 +1,7 @@
 # Big-Scale Analytics 2021 - Team Google
 
 - Francis Ruckstuhl (16-821-738)
-- David Netter ()
+- David Netter (16-828-220)
 - Loïc Rouiller-Monay (16-832-453)
 
 ## Table of Contents
