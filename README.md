@@ -45,7 +45,7 @@ Secondly, we apply our data collection strategy.
 
 At the project's level as a whole, Figure 1 represents the stages we will go through until the final deliverables. Regarding how we will solve the problem of creating a predictive model, we will practice a method inspired by what we have read and learned in the research findings mentioned at the end of the readme. The method is described in the following paragraphs.
 
-First of all, we collected data from reading comprehension tests from examples of exams made available according to each French level by the "Fondation Esprit Francophonie DELF DALF Suisse". This allowed us to collect a whole set of more than 1000 sentences sorted by experts from A1 level to C2. Therefore, we guarantee the quality and the accuracy of the training data we provide to the model.
+First of all, we collected data from reading comprehension tests from examples of exams made available according to each French level by the ex. This allowed us to collect a whole set of more than 1000 sentences sorted by experts from A1 level to C2. Therefore, we guarantee the quality and the accuracy of the training data we provide to the model.
 
 Following this, we will create an NLP Pipeline to transform our sentences into the most efficient features possible to train a machine learning model. To boost accuracy, we will have to extract additional features such as measuring the number of frequencies of words from 1-4 syllables, the diversity of vocabulary per sentence, the number of words, and more on this subject can be found highlighted in yellow in the research findings Microsoft Word file which can be found in the "documents" folder of this repository.
 
@@ -54,6 +54,18 @@ We will treat this problem as a classification problem. However, we have the int
 Regarding the creation of the model, we will use the resources made available on the Google Cloud. We will first try to work with Google AutoML; then, if we feel that we are not satisfied with the solution, it would be possible to do things a little more manually by creating an instance of AI Platform Notebooks (JupyterLab) is a virtual machine instance on which comes preinstalled with the latest machine learning and data science libraries. If that is the case, we will evaluate algorithms that performed well in the papers we read, such as those highlighted in blue in the research findings Microsoft Word file in the "documents" folder of this repository. Some of which are Logistic Regression, AdaBoost, LDA, SVM, kNN, and Neural Networks.
 
 Then we will have to optimize the model, save the best performing model and deploy it. Those stages will be described in more detail later in the course of the project.
+
+```html
+<div style="width: 960px; height: 720px; margin: 10px; position: relative;">
+  <iframe
+    allowfullscreen
+    frameborder="0"
+    style="width:960px; height:720px"
+    src="https://lucid.app/documents/embeddedchart/4ce4bee6-d8cd-49da-9426-4cbe0f52818a"
+    id="lgyhY4dA9bO9"
+  ></iframe>
+</div>
+```
 
 ## 3. Contribution
 
