@@ -55,6 +55,8 @@ Regarding the creation of the model, we will use the resources made available on
 
 Then we will have to optimize the model, save the best performing model and deploy it. Those stages will be described in more detail later in the course of the project.
 
+![Figure 1](https://raw.githubusercontent.com/loicrouillermonay/BSA2021_Google/main/documents/figures/BSA2021%20-%20Team%20Google_%20Figure%201.svg)
+
 ## 3. Contribution
 
 Team Google annotated VWXYZ sentences for Milestone 1.
