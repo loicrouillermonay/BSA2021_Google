@@ -43,7 +43,17 @@ Secondly, we apply our data collection strategy.
 
 ## 2. Approach to solve the problem
 
-_Lorem ipsum dolor sit amet, consectetur adipiscing elit._
+At the project's level as a whole, Figure 1 represents the stages we will go through until the final deliverables. Regarding how we will solve the problem of creating a predictive model, we will practice a method inspired by what we have read and learned in the research findings mentioned at the end of the readme. The method is described in the following paragraphs.
+
+First of all, we collected data from reading comprehension tests from examples of exams made available according to each French level by the "Fondation Esprit Francophonie DELF DALF Suisse". This allowed us to collect a whole set of more than 1000 sentences sorted by experts from A1 level to C2. Therefore, we guarantee the quality and the accuracy of the training data we provide to the model.
+
+Following this, we will create an NLP Pipeline to transform our sentences into the most efficient features possible to train a machine learning model. To boost accuracy, we will have to extract additional features such as measuring the number of frequencies of words from 1-4 syllables, the diversity of vocabulary per sentence, the number of words, and more on this subject can be found highlighted in yellow in the research findings Microsoft Word file which can be found in the "documents" folder of this repository.
+
+We will treat this problem as a classification problem. However, we have the intuition that it would be possible to treat it as a regression problem with a difficulty that could range from 1 to 6, such as from A1 to C2, while imagining that it would be possible to create a model that can then evaluate a slight difference in level between two texts of the same level as long as a result is higher. For example, two texts with a model that predicts difficulties of 5.16 and 5.38 will be texts judged as C1, but the second would be slightly higher and could offer a more precise system of recommendations to people. However, we will not choose this method. Or, at least, not at this moment.
+
+Regarding the creation of the model, we will use the resources made available on the Google Cloud. We will first try to work with Google AutoML; then, if we feel that we are not satisfied with the solution, it would be possible to do things a little more manually by creating an instance of AI Platform Notebooks (JupyterLab) is a virtual machine instance on which comes preinstalled with the latest machine learning and data science libraries. If that is the case, we will evaluate algorithms that performed well in the papers we read, such as those highlighted in blue in the research findings Microsoft Word file in the "documents" folder of this repository. Some of which are Logistic Regression, AdaBoost, LDA, SVM, kNN, and Neural Networks.
+
+Then we will have to optimize the model, save the best performing model and deploy it. Those stages will be described in more detail later in the course of the project.
 
 ## 3. Contribution
 
