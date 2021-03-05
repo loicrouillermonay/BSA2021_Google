@@ -55,7 +55,15 @@ Regarding the creation of the model, we will use the resources made available on
 
 Then we will have to optimize the model, save the best performing model and deploy it. Those stages will be described in more detail later in the course of the project.
 
-![Figure 1](https://lucid.app/documents/embeddedchart/4ce4bee6-d8cd-49da-9426-4cbe0f52818a)
+<div style="width: 960px; height: 720px; margin: 10px; position: relative;">
+  <iframe
+    allowfullscreen
+    frameborder="0"
+    style="width:960px; height:720px"
+    src="https://lucid.app/documents/embeddedchart/4ce4bee6-d8cd-49da-9426-4cbe0f52818a"
+    id="lgyhY4dA9bO9"
+  ></iframe>
+</div>
 
 ## 3. Contribution
 
