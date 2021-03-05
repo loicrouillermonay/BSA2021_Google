@@ -65,4 +65,4 @@ Team Google annotated VWXYZ sentences for Milestone 1.
 
 ### Sources of text data
 
-- Niveaux—Delfdalf.ch. (2021). Consulté 28 février 2021, à l’adresse https://www.delfdalf.ch/niveaux
+- Niveaux—Delfdalf.ch. (2021). https://www.delfdalf.ch/niveaux
