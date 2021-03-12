@@ -45,7 +45,7 @@ Secondly, we apply our data collection strategy.
 
 Regarding how we will solve the problem of creating a predictive model, we will practice a method inspired by what we have read and learned in the research findings mentioned at the end of the readme. The method is described in the following paragraphs.
 
-First of all, we collected data from reading comprehension tests from examples of exams made available according to each French level by the ex. This allowed us to collect a whole set of more than 1000 sentences sorted by experts from A1 level to C2. Therefore, we guarantee the quality and the accuracy of the training data we provide to the model.
+First of all, we collected data from reading comprehension tests from examples of exams made available according to each French level by the "Fondation Esprit Francophonie DELF DALF Suisse". This allowed us to collect a whole set of more than 1000 sentences sorted by experts from A1 level to C2. Therefore, we guarantee the quality and the accuracy of the training data.
 
 Following this, we will create an NLP Pipeline to transform our sentences into the most efficient features possible to train a machine learning model. To boost accuracy, we will have to extract additional features such as measuring the number of frequencies of words from 1-4 syllables, the diversity of vocabulary per sentence, the number of words, and more on this subject can be found highlighted in yellow in the research findings Microsoft Word file which can be found in the "documents" folder of this repository.
 
@@ -57,7 +57,7 @@ Then we will have to optimize the model, save the best performing model and depl
 
 ## 3. Contribution
 
-Team Google annotated VWXYZ sentences for Milestone 1.
+Team Google annotated 1021 sentences for Milestone 1.
 
 ## 4. Bibliography
 
