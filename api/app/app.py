@@ -1,15 +1,15 @@
+#!/usr/bin/env python
 from flask import Flask, request, jsonify
-from flask_cors import CORS
-from flask_sslify import SSLify
 import os
-from pathlib import Path
 import torch
+import logging
 from transformers import CamembertForSequenceClassification, CamembertTokenizer
 
 
+logging.basicConfig(format='%(message)s', level=logging.INFO)
+
+
 app = Flask(__name__)
-CORS(app, supports_credentials=True)
-sslify = SSLify(app)
 app.config["DEBUG"] = False
 
 
@@ -57,15 +57,15 @@ def home():
 def make_prediction():
     text = request.args.get("text", "")
     prediction = predict([text], model)
-    return jsonify({'text': text, 'difficulty': difficulties[int(prediction)]})
+    return jsonify({'text': text, 'difficulty': difficulties[int(prediction)]}), 200
 
 
 @app.route('/api/predict', methods=['GET'])
 def make_prediction_of_list():
     text = request.args.get("text", "")
     prediction = predict([text], model)
-    return jsonify({'texts': text, 'difficulty': difficulties[int(prediction)]})
+    return jsonify({'texts': text, 'difficulty': difficulties[int(prediction)]}), 200
 
 
 if __name__ == '__main__':
-    app.run(ssl_context="adhoc", host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=int(os.environ.get('PORT', 8080)))
