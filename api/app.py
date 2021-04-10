@@ -1,7 +1,8 @@
 from flask import Flask, request, jsonify
 import os
+from pathlib import Path
 import torch
-from transformers import CamembertForSequenceClassification, CamembertTokenizer, AdamW, get_linear_schedule_with_warmup
+from transformers import CamembertForSequenceClassification, CamembertTokenizer
 
 
 app = Flask(__name__)
