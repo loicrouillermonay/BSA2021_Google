@@ -1,13 +1,17 @@
 # Use Python37
 FROM python:3.7
 
-# Copy local code to the container image.
-ENV APP_HOME /app
-WORKDIR $APP_HOME
-COPY ./app .
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+ADD . /app
 
 # Install production dependencies.
 RUN pip install -r requirements.txt
 
+# Make port 80 available to the world outside this container
+EXPOSE 80
+
 # Run flask app
-CMD ["gunicorn", "-w","1", "-b","0.0.0.0:8080","app:app"]
+CMD ["python", "app.py"]
