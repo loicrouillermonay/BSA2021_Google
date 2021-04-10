@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+from flask_sslify import SSLify
 import os
 from pathlib import Path
 import torch
@@ -6,7 +8,9 @@ from transformers import CamembertForSequenceClassification, CamembertTokenizer
 
 
 app = Flask(__name__)
-app.config["DEBUG"] = True
+CORS(app, supports_credentials=True)
+sslify = SSLify(app)
+app.config["DEBUG"] = False
 
 
 def get_model():
@@ -64,4 +68,4 @@ def make_prediction_of_list():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(ssl_context="adhoc", host="0.0.0.0", port=5000)

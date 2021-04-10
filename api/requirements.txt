@@ -1,7 +1,6 @@
-flask
 torch
+torchvision
+flask
 transformers
-numpy
-pandas
 sentencepiece
 gunicorn
