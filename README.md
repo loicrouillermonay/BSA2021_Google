@@ -96,29 +96,29 @@ The results of this model are phenomenal. Almost too good to be true. We reach 9
 CamemBERT - classification_report:
 
 ```python
-              precision    recall  f1-score   support
+                          precision    recall  f1-score   support
 
-           0       0.99      0.95      0.97       148
-           1       0.94      0.99      0.97       170
-           2       0.97      0.96      0.97       154
-           3       0.99      0.99      0.99       156
-           4       0.98      0.98      0.98       160
-           5       0.98      0.98      0.98       132
+                       0       0.99      0.95      0.97       148
+                       1       0.94      0.99      0.97       170
+                       2       0.97      0.96      0.97       154
+                       3       0.99      0.99      0.99       156
+                       4       0.98      0.98      0.98       160
+                       5       0.98      0.98      0.98       132
 
-    accuracy                           0.98       920
-   macro avg       0.98      0.98      0.98       920
-weighted avg       0.98      0.98      0.98       920
+                accuracy                           0.98       920
+               macro avg       0.98      0.98      0.98       920
+            weighted avg       0.98      0.98      0.98       920
 ```
 
 CamemBERT - Confusion Matrix
 
 ```python
-       [141,   6,   1,   0,   0,   0],
-       [  1, 168,   1,   0,   0,   0],
-       [  0,   4, 148,   2,   0,   0],
-       [  0,   0,   1, 155,   0,   0],
-       [  0,   0,   1,   0, 157,   2],
-       [  0,   0,   0,   0,   3, 129]
+                               [141,   6,   1,   0,   0,   0],
+                               [  1, 168,   1,   0,   0,   0],
+                               [  0,   4, 148,   2,   0,   0],
+                               [  0,   0,   1, 155,   0,   0],
+                               [  0,   0,   1,   0, 157,   2],
+                               [  0,   0,   0,   0,   3, 129]
 ```
 
 So we chose to take this model and deploy it.
