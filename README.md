@@ -64,7 +64,7 @@ Much work has been done on milestone two, and this chapter summarizes it in a pr
 
 To make it simple, what we will describe in the following chapters, we first did it with our data set that we had collected. However, there was very little data to do anything with and in the end, it was a matter of knowing which model underfitted the least. That is why the strategy shifted a bit and we selected 9174 observations as a merge of our data and those of our colleagues that we found the most qualitative. In this sense, we could finally work on models that were not constantly underfitting to know which one will be chosen for the final milestone of this project, where everyone will train with the same dataset.
 
-#### Predictive models
+### Predictive models
 
 Three types of models were created in parallel to evaluate the results and choose the best one. To put the results in context:
 
@@ -73,11 +73,11 @@ Three types of models were created in parallel to evaluate the results and choos
 
 All the notebooks for each of the models and the one for data preparation are in the "notebooks" folder in the GitHub archive.
 
-##### A. Google Cloud Platform - Natural Language
+#### A. Google Cloud Platform - Natural Language
 
 This is the simplest solution. All data with a text column and a column with the label were uploaded to Google Storage and then were transmitted to the product "Natural Language". Then Google creates a model by itself via its text classification wizard. The training lasts one day, and the model's accuracy is 61.39%. From the Google Cloud Platform, it is possible in one click to deploy the model and make API calls. There was no fine-tuning possible and this model was kept as a backup if no other predictive model were created.
 
-##### B. Features Extraction + Pycaret / & Bag-Of-Words
+#### B. Features Extraction + Pycaret / & Bag-Of-Words
 
 At this point, the data was taken and we applied what was read in our preliminary research. Various information were extracted about the texts such as sentence length, the number of stopwords per sentence, Part-Of-Speech statistics, and Entity Recognition to create a whole DataFrame of text metadata.
 
@@ -96,7 +96,7 @@ Logistic Regression             0.3667     0.7470   0.3760    0.3613    2.044
 
 We continue by trying to integrate Bag-Of-Words. The results are that... tbd.
 
-##### C. CamemBERT For Sequence Classification
+#### C. CamemBERT For Sequence Classification
 
 The CamemBERT model was proposed in the paper "CamemBERT: a Tasty French Language Model" by Louis Martin, Benjamin Muller, Pedro Javier Ortiz Suárez, Yoann Dupont, Laurent Romary, Éric Villemonte de la Clergerie, Djamé Seddah, and Benoît Sagot. It is based on Facebook’s RoBERTa model released in 2019. (Huggingface, 2021). It is a model trained on 138GB of French text. We used more specifically "CamemBERTForSequenceClassification". CamemBERT Model transformer with a sequence classification/regression head on top. Our thought process is the following: with our knowledge in deep learning, why not take a model that already understands more or less French to make a classification. It could have beed done thanks to a very clear tutorial from the author that has not left any more information on himself aside from his name being Olivier. (“Analyse de sentiments avec CamemBERT,” 2021)
 
