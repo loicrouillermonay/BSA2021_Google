@@ -86,12 +86,12 @@ Only based on this metadata, a classification on the labels using the PyCaret li
 On only the metadata, the best model being a random forest classifier obtained an accuracy of 53%. We were surprised in good, but we remain dissatisfied when we analyze the matrix confusion. Indeed, there is a too significant proportion of deviation and extreme on the wrong predictions. We have the intuition that the method is not good enough.
 
 ```Python
-Model                           Accuracy	AUC	    Recall	Prec.	TT (Sec)
-Random Forest Classifier        0.5302	    0.8410	0.5314	0.5295	3.108
-Extra Trees Classifier          0.5300      0.8441	0.5315	0.5304	3.510
-CatBoost Classifier             0.5029	    0.8136	0.5056	0.5011	35.704
-K Neighbors Classifier          0.3935      0.7193	0.3988	0.3894	1.712
-Logistic Regression             0.3667	    0.7470	0.3760	0.3613	2.044
+Model                           Accuracy	TT (Sec)
+Random Forest Classifier        0.5302	    3.108
+Extra Trees Classifier          0.5300      3.510
+CatBoost Classifier             0.5029	    35.704
+K Neighbors Classifier          0.3935      1.712
+Logistic Regression             0.3667	    2.044
 ```
 
 We continue by trying to integrate Bag-Of-Words. The results are that... tbd.
