@@ -1,34 +1,36 @@
 import streamlit as st
-import joblib
-import os
-import pandas as pd
+import requests
+
+
+def streamlit_config():
+    st.set_page_config(
+        page_title='Lingorank')
+    hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 
 def main():
-    """Lingorank frontend"""
-
+    """BSA 2021: Team Google - Lingorank frontend"""
+    streamlit_config()
     st.title("Lingorank UI")
-    st.subheader("BSA2021 - Team Google")
+    st.text(" Lingorank predicts the difficulty of a French written sentence.")
 
-    # Creating sidebar with selection box
-    options = ["Prediction", "Information"]
-    selection = st.sidebar.selectbox("Choose Option", options)
+    # Creating a text box for user input
+    sentence = st.text_area(
+        "Enter a French written sentence.", "Entrez votre phrase ici.")
 
-    # Information" page
-    if selection == "Information":
-        st.info("General Information")
-        st.markdown("Some information here")
-        st.subheader("This is a subheader")
-
-    # Predication page
-    if selection == "Prediction":
-        st.info("Prediction with Team Google's ML Models")
-        # Creating a text box for user input
-        sentence = st.text_area("Enter Text", "Type Here")
-
-        if st.button("Classify"):
-            # do some stuff here
-            st.success("Text Difficulty categorized as: B2")
+    if st.button("Classify"):
+        with st.spinner(text='In progress...'):
+            query = {'text': sentence}
+            response = requests.get(
+                'http://51.103.168.179/api/predict', params=query)
+            st.success(
+                f"Difficulty categorized as: {response.json()['difficulty']}")
 
 
 # Required to let Streamlit instantiate our web app.
