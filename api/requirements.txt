@@ -3,4 +3,3 @@ torchvision
 flask
 transformers
 sentencepiece
-gunicorn
