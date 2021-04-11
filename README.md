@@ -102,7 +102,7 @@ The CamemBERT model was proposed in the paper "CamemBERT: a Tasty French Languag
 
 Therefore, labels were transformed from A1 to C2 into numbers from 0 to 5. Then, text preprocessing via CamembertTokenizer is done to transform the data into tensors. As a result, we were able to train the model via a GPU instance for about 20 epochs, about 5 hours. At each time, if the loss function improves, the model is saved. This way, it is possible to make separate and multiple training sessions by reloading a model. When a prediction is made, the text has to be tokenized and then transpose it from 0 to 5 again from A1 to C2.
 
-The results of this model are excellent: 98% accuracy. We insist on the fact that the predictions were made on 20% of the dataset on data that the model has never seen. We also observe a matrix confusion that is not far from the correct annotated difficulty when there is an error. Even stronger, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
+The results of this model are excellent: 98% accuracy. We insist on the fact that we double checked that the predictions were made on 10% of the dataset on data that the model has never seen. We also observe a matrix confusion that is not far from the correct annotated difficulty when there is an error. Furthermore, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
 
 CamemBERT - Classification Report
 
@@ -132,7 +132,7 @@ CamemBERT - Confusion Matrix
     [  0,   0,   0,   0,   3, 129]
 ```
 
-So this model was chosen. This is the one we will do the final training with. And if this were to be the final model, the group would have re-trained it from 0 on the entire data set without excluding 20% of the data that is in the test dataset.
+This model is the one we deployed and the one we will do the final training with. And if this were to be the final model, the group would have finalized the model, that means it again from scratch on the entire data set with the test dataset included.
 
 ### Deployment
 
