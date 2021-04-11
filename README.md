@@ -58,11 +58,11 @@ Team Google annotated 1020 sentences for Milestone 1.
 
 ## 4. Synthesis of the work done on Milestone 2
 
-Much work has been done on milestone two, and this chapter summarizes it in a precise and short way. This chapter will first describe our strategy regarding the training data, then explain the creation of three types of models that we did in parallel, then finally how we deployed this model to make an API and a graphical interface.
+Much work has been done on milestone two, and this chapter summarizes it in a precise and short way. This chapter will first describe our strategy regarding the training data, then explain the creation of three types of models that was done in parallel, then finally how the model was deployed as an an API and a user friendly UI frontend.
 
 ### A quick word on the data
 
-To make it simple, what we will describe in the following chapters, we first did it with our data set that we had collected. However, we had very little data and in the end, it was a matter of knowing which model underfitted the least. That is why we changed our strategy and selected 9174 observations from our data and those of our colleagues that we found the most qualitative. In this sense, we could finally work on models that were not constantly underfitting to know which one will be chosen for the final milestone of this project, where everyone will train with the same dataset.
+To make it simple, what we will describe in the following chapters, we first did it with our data set that we had collected. However, there was very little data to do anything with and in the end, it was a matter of knowing which model underfitted the least. That is why the strategy shifted a bit and we selected 9174 observations as a merge of our data and those of our colleagues that we found the most qualitative. In this sense, we could finally work on models that were not constantly underfitting to know which one will be chosen for the final milestone of this project, where everyone will train with the same dataset.
 
 #### Predictive models
 
@@ -75,23 +75,34 @@ All the notebooks for each of the models and the one for data preparation are in
 
 ##### A. Google Cloud Platform - Natural Language
 
-This is the simplest solution. All data with a text column and a column with the label were uploaded to Google Storage and then were transmitted to the product "Natural Language". Then Google creates a model by itself via its text classification wizard. The training lasts one day, and an email was sent to us where the model's accuracy is 61.39%. From the interface, it is possible in one click to deploy the model and make API calls. We did not work further with this model.
+This is the simplest solution. All data with a text column and a column with the label were uploaded to Google Storage and then were transmitted to the product "Natural Language". Then Google creates a model by itself via its text classification wizard. The training lasts one day, and the model's accuracy is 61.39%. From the Google Cloud Platform, it is possible in one click to deploy the model and make API calls. There was no fine-tuning possible and this model was kept as a backup if no other predictive model were created.
 
 ##### B. Features Extraction + Pycaret / & Bag-Of-Words
 
-At this point, we decided to take the data and follow what we had read in our preliminary research. We extracted various information about the texts such as sentence length, the number of stopwords per sentence, Part-Of-Speech statistics, and Entity Recognition to create a whole DataFrame of text metadata.
+At this point, the data was taken and we applied what was read in our preliminary research. Various information were extracted about the texts such as sentence length, the number of stopwords per sentence, Part-Of-Speech statistics, and Entity Recognition to create a whole DataFrame of text metadata.
 
-Only based on this metadata, we made a classification on the labels using the PyCaret library. PyCaret is an open-source, low-code machine learning library in Python. It allows, among other things, very easily and quickly to make comparisons between many different algorithms and do more advanced preprocessing on the data. The library also offers an easy way to save predictive models and deploy them.
+Only based on this metadata, a classification on the labels using the PyCaret library was made. PyCaret is an open-source, low-code machine learning library in Python. It allows, among other things, very easily and quickly to make comparisons between many different algorithms and do more advanced preprocessing on the data. The library also offers an easy way to save predictive models and deploy them.
 
-On only the metadata, we obtained an accuracy of 53%. We were surprised in good, but we remain dissatisfied when we analyze the matrix confusion. Indeed, there is a too significant proportion of deviation and extreme on the wrong predictions. We have the intuition that the method is not good enough. We continue by trying to integrate Bag-Of-Words. The results are that... tbd.
+On only the metadata, the best model being a random forest classifier obtained an accuracy of 53%. We were surprised in good, but we remain dissatisfied when we analyze the matrix confusion. Indeed, there is a too significant proportion of deviation and extreme on the wrong predictions. We have the intuition that the method is not good enough.
+
+```Python
+                Model	                    Accuracy	AUC	    Recall	Prec.	F1	    Kappa	MCC	    TT (Sec)
+                Random Forest Classifier	0.5302	    0.8410	0.5314	0.5295	0.5281	0.4344	0.4350	3.108
+                Extra Trees Classifier	    0.5300  	0.8441	0.5315	0.5304	0.5282	0.4343	0.4349	3.510
+                CatBoost Classifier	        0.5029	    0.8136	0.5056	0.5011	0.5012	0.4020	0.4022	35.704
+                K Neighbors Classifier  	0.3935  	0.7193	0.3988	0.3894	0.3859	0.2720	0.2735	1.712
+                Logistic Regression	        0.3667	    0.7470	0.3760	0.3613	0.3552	0.2411	0.2433	2.044
+```
+
+We continue by trying to integrate Bag-Of-Words. The results are that... tbd.
 
 ##### C. CamemBERT For Sequence Classification
 
-The CamemBERT model was proposed in CamemBERT: a Tasty French Language Model by Louis Martin, Benjamin Muller, Pedro Javier Ortiz Suárez, Yoann Dupont, Laurent Romary, Éric Villemonte de la Clergerie, Djamé Seddah, and Benoît Sagot. It is based on Facebook’s RoBERTa model released in 2019. (Huggingface, 2021). It is a model trained on 138GB of French text. We used more specifically "CamemBERTForSequenceClassification". CamemBERT Model transformer with a sequence classification/regression head on top. Our thought process is the following: with our knowledge in deep learning, why not take a model that already understands more or less French to make a classification. We could do this thanks to a tutorial from the author that has not left any more information on himself aside from his name is Olivier. (“Analyse de sentiments avec CamemBERT,” 2021)
+The CamemBERT model was proposed in the paper "CamemBERT: a Tasty French Language Model" by Louis Martin, Benjamin Muller, Pedro Javier Ortiz Suárez, Yoann Dupont, Laurent Romary, Éric Villemonte de la Clergerie, Djamé Seddah, and Benoît Sagot. It is based on Facebook’s RoBERTa model released in 2019. (Huggingface, 2021). It is a model trained on 138GB of French text. We used more specifically "CamemBERTForSequenceClassification". CamemBERT Model transformer with a sequence classification/regression head on top. Our thought process is the following: with our knowledge in deep learning, why not take a model that already understands more or less French to make a classification. It could have beed done thanks to a very clear tutorial from the author that has not left any more information on himself aside from his name being Olivier. (“Analyse de sentiments avec CamemBERT,” 2021)
 
-Therefore, we had to transform the labels A1 to C2 into numbers from 0 to 5. Then, we had to do some text preprocessing via CamembertTokenizer to transform the data into tensors. As a result, we were able to train our PyTorch model via a GPU instance for about 20 epochs, about 5 hours. At each time, if the loss function improves, we register the model. This way, it is possible to make separate and multiple training sessions by reloading a model. When we make a prediction, we have to tokenize the text and then translate it from 0 to 5 again from A1 to C2.
+Therefore, labels were transformed from A1 to C2 into numbers from 0 to 5. Then, text preprocessing via CamembertTokenizer is done to transform the data into tensors. As a result, we were able to train the model via a GPU instance for about 20 epochs, about 5 hours. At each time, if the loss function improves, the model is saved. This way, it is possible to make separate and multiple training sessions by reloading a model. When a prediction is made, the text has to be tokenized and then transpose it from 0 to 5 again from A1 to C2.
 
-The results of this model are phenomenal. Almost too good to be true. We reach 98% accuracy, and we observe a matrix confusion that is not far from the correct annotated difficulty when there is an error. Even stronger, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
+The results of this model are excellent: 98% accuracy. We insist on the fact that the predictions were made on 20% of the dataset on data that the model has never seen. We also observe a matrix confusion that is not far from the correct annotated difficulty when there is an error. Even stronger, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
 
 CamemBERT - Classification Report
 
@@ -121,15 +132,15 @@ CamemBERT - Confusion Matrix
                                [  0,   0,   0,   0,   3, 129]
 ```
 
-So we chose to take this model and deploy it.
+So this model was chosen. This is the one we will do the final training with. And if this were to be the final model, the group would have re-trained it from 0 on the entire data set without excluding 20% of the data that is in the test dataset.
 
 ### Deployment
 
-For deployment, we created a simple Flask API that loads the model and predicts a sentence. The API is in the folder "api" of this GitHub repository. We then Dockerized the API and published it on Docker Hub. Afterward, we created an Azure Container instance, imported the Docker Flask API on Docker Hub and voilà.
+For deployment, a simple Flask API was created that loads the model and predicts a sentence when receiving a request. The API is in the folder "api" of this GitHub repository. The API was Dockerized and published on Docker Hub. Afterward, an Azure Container instance was created, where the Docker Container containing the Flask API with the model was imported and voilà.
 
 A big lesson learned was that we could not run our docker container on clouds for a long time because we had Docker on the new macOS with Apple M1 chips. The Docker container architecture was in arm64, and it was not supported on Azure, and Google Cloud Run instances. It sounds simple, but it took a long time to understand because no error message logs understood and targeted this problem.
 
-The team did not stop there, and we created a first frontend release in the folder of the same name in the GitHub repository or created a web application with the Python library "Streamlit" that we then hosted on Heroku. From this interface, it is possible to fill a sentence in a text input, and a request is sent to the API to have an answer in a very user-friendly and interactive way.
+The team did not stop there, first frontend release that is in the folder of the same name in the GitHub repository was deployed. It was created with the Python library "Streamlit". The application is hosted on Heroku. From this interface, it is possible to fill a sentence in a text input, and a request is sent to the API to have an answer in a very user-friendly and interactive way.
 
 ## 4. Bibliography
 
@@ -155,3 +166,17 @@ Other useful papers to correlate findings and provide additional insight :
 - Niveaux—Delfdalf.ch. (2021). https://www.delfdalf.ch/niveaux
 
 ### Milestone 2
+
+- Google Cloud. (2021). Troubleshooting  |  Cloud Run Documentation  |  Google Cloud. https://cloud.google.com/run/docs/troubleshooting
+- Huggingface. (2021). CamemBERT. model_doc/camembert.html
+- Mahugh, D. (2020, February 17). Deploying a Flask app to Google App Engine. Medium. https://medium.com/@dmahugh_70618/deploying-a-flask-app-to-google-app-engine-faa883b5ffab
+- Nakamura, T. N. (2020, November 5). How to deploy a simple Flask app on Cloud Run with Cloud Endpoint. Medium. https://medium.com/fullstackai/how-to-deploy-a-simple-flask-app-on-cloud-run-with-cloud-endpoint-e10088170eb7
+- Olivier. (2021, January 5). Analyse de sentiments avec CamemBERT. Le Data Scientist. https://ledatascientist.com/analyse-de-sentiments-avec-camembert/
+- Reynoso, R. (2020, July 15). How to Deploy Multiple Apps Under a Single GitHub Repository to Heroku. Medium. https://betterprogramming.pub/how-to-deploy-multiple-apps-under-a-single-github-repository-to-heroku-f6177489d38
+- Sanchez, A. (2018, April 8). Creating and Deploying a Flask app with Docker on Azure in 5 Easy Steps. Medium. https://medium.com/@alexjsanchez/creating-and-deploying-a-flask-app-with-docker-on-azure-in-5-easy-9f7aa7a12145
+- Shchutski, V. (2020, February 11). French NLP: Entamez le CamemBERT avec les librairies fast-bert et transformers. Medium. https://medium.com/@vitalshchutski/french-nlp-entamez-le-camembert-avec-les-librairies-fast-bert-et-transformers-14e65f84c148
+- Vogel, J. (2021, January 30). How to Actually Deploy Docker Images Built on M1 Macs With Apple Silicon. Medium. https://betterprogramming.pub/how-to-actually-deploy-docker-images-built-on-a-m1-macs-with-apple-silicon-a35e39318e97
+
+```
+
+```
