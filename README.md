@@ -1,15 +1,8 @@
 # Big-Scale Analytics 2021 - Team Google
 
-- Francis Ruckstuhl 
-- David Netter 
-- Loïc Rouiller-Monay 
-
-## Table of Contents
-
-1. Introduction
-2. Approach to solve the problem
-3. Contribution
-4. Bibliography
+- Francis Ruckstuhl
+- David Netter
+- Loïc Rouiller-Monay
 
 ## 1. Introduction
 
@@ -41,6 +34,10 @@ The first milestone is to research the subject by reading scientific publication
 
 Secondly, we apply our data collection strategy.
 
+### Milestone 2 - Creating/Evaluating the model
+
+The second milestone is to create a predictive model that can predict how easy or difficult a french sentence is. At the end of the milestone, the deliverable is a callable API point which, given a text in French, will return its difficulty. Part of the exercise is to create an API, dockerize the solution and use cloud services.
+
 ## 2. Approach to solve the problem
 
 To solve the problem of creating a predictive model, we will use a method inspired from the papers we have read and learned in the research findings mentioned at the end of the readme. The method is described in the following paragraphs.
@@ -59,15 +56,88 @@ Then we will have to optimize the model, save the best performing model and depl
 
 Team Google annotated 1020 sentences for Milestone 1.
 
+## 4. Synthesis of the work done on Milestone 2
+
+Much work has been done on milestone two, and this chapter summarizes it in a precise and short way. This chapter will first describe our strategy regarding the training data, then explain the creation of three types of models that we did in parallel, then finally how we deployed this model to make an API and a graphical interface.
+
+### A quick word on the data
+
+To make it simple, what we will describe in the following chapters, we first did it with our data set that we had collected. However, we had very little data and in the end, it was a matter of knowing which model underfitted the least. That is why we changed our strategy and selected 9174 observations from our data and those of our colleagues that we found the most qualitative. In this sense, we could finally work on models that were not constantly underfitting to know which one will be chosen for the final milestone of this project, where everyone will train with the same dataset.
+
+#### Predictive models
+
+Three types of models were created in parallel to evaluate the results and choose the best one. To put the results in context:
+
+- Base rate: 0.16
+- Default Rate: 0.19
+
+All the notebooks for each of the models and the one for data preparation are in the "notebooks" folder in the GitHub archive.
+
+##### A. Google Cloud Platform - Natural Language
+
+This is the simplest solution. All data with a text column and a column with the label were uploaded to Google Storage and then were transmitted to the product "Natural Language". Then Google creates a model by itself via its text classification wizard. The training lasts one day, and an email was sent to us where the model's accuracy is 61.39%. From the interface, it is possible in one click to deploy the model and make API calls. We did not work further with this model.
+
+##### B. Features Extraction + Pycaret / & Bag-Of-Words
+
+At this point, we decided to take the data and follow what we had read in our preliminary research. We extracted various information about the texts such as sentence length, the number of stopwords per sentence, Part-Of-Speech statistics, and Entity Recognition to create a whole DataFrame of text metadata.
+
+Only based on this metadata, we made a classification on the labels using the PyCaret library. PyCaret is an open-source, low-code machine learning library in Python. It allows, among other things, very easily and quickly to make comparisons between many different algorithms and do more advanced preprocessing on the data. The library also offers an easy way to save predictive models and deploy them.
+
+On only the metadata, we obtained an accuracy of 53%. We were surprised in good, but we remain dissatisfied when we analyze the matrix confusion. Indeed, there is a too significant proportion of deviation and extreme on the wrong predictions. We have the intuition that the method is not good enough. We continue by trying to integrate Bag-Of-Words. The results are that... tbd.
+
+##### C. CamemBERT For Sequence Classification
+
+The CamemBERT model was proposed in CamemBERT: a Tasty French Language Model by Louis Martin, Benjamin Muller, Pedro Javier Ortiz Suárez, Yoann Dupont, Laurent Romary, Éric Villemonte de la Clergerie, Djamé Seddah, and Benoît Sagot. It is based on Facebook’s RoBERTa model released in 2019. (Huggingface, 2021). It is a model trained on 138GB of French text. We used more specifically "CamemBERTForSequenceClassification". CamemBERT Model transformer with a sequence classification/regression head on top. Our thought process is the following: with our knowledge in deep learning, why not take a model that already understands more or less French to make a classification. We could do this thanks to a tutorial from the author that has not left any more information on himself aside from his name is Olivier. (“Analyse de sentiments avec CamemBERT,” 2021)
+
+Therefore, we had to transform the labels A1 to C2 into numbers from 0 to 5. Then, we had to do some text preprocessing via CamembertTokenizer to transform the data into tensors. As a result, we were able to train our PyTorch model via a GPU instance for about 20 epochs, about 5 hours. At each time, if the loss function improves, we register the model. This way, it is possible to make separate and multiple training sessions by reloading a model. When we make a prediction, we have to tokenize the text and then translate it from 0 to 5 again from A1 to C2.
+
+The results of this model are phenomenal. Almost too good to be true. We reach 98% accuracy, and we observe a matrix confusion that is not far from the correct annotated difficulty when there is an error. Even stronger, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
+
+```python
+# classification_report
+              precision    recall  f1-score   support
+
+           0       0.99      0.95      0.97       148
+           1       0.94      0.99      0.97       170
+           2       0.97      0.96      0.97       154
+           3       0.99      0.99      0.99       156
+           4       0.98      0.98      0.98       160
+           5       0.98      0.98      0.98       132
+
+    accuracy                           0.98       920
+   macro avg       0.98      0.98      0.98       920
+weighted avg       0.98      0.98      0.98       920
+
+# Confusion Matrix
+       [141,   6,   1,   0,   0,   0],
+       [  1, 168,   1,   0,   0,   0],
+       [  0,   4, 148,   2,   0,   0],
+       [  0,   0,   1, 155,   0,   0],
+       [  0,   0,   1,   0, 157,   2],
+       [  0,   0,   0,   0,   3, 129]
+```
+
+So we chose to take this model and deploy it.
+
+### Deployment
+
+For deployment, we created a simple Flask API that loads the model and predicts a sentence. The API is in the folder "api" of this GitHub repository. We then Dockerized the API and published it on Docker Hub. Afterward, we created an Azure Container instance, imported the Docker Flask API on Docker Hub and voilà.
+
+A big lesson learned was that we could not run our docker container on clouds for a long time because we had Docker on the new macOS with Apple M1 chips. The Docker container architecture was in arm64, and it was not supported on Azure, and Google Cloud Run instances. It sounds simple, but it took a long time to understand because no error message logs understood and targeted this problem.
+
+The team did not stop there, and we created a first frontend release in the folder of the same name in the GitHub repository or created a web application with the Python library "Streamlit" that we then hosted on Heroku. From this interface, it is possible to fill a sentence in a text input, and a request is sent to the API to have an answer in a very user-friendly and interactive way.
+
 ## 4. Bibliography
 
 ### Papers
 
 The two main inspirations for the project :
-- Curto, P., Mamede, N., & Baptista, J. (2015). Automatic Text Difficulty Classifier—Assisting the Selection Of Adequate Reading Materials For European Portuguese Teaching. 36‑44. https://doi.org/10.5220/0005428300360044  
-- Santucci, V., Santarelli, F., Forti, L., & Spina, S. (2020). Automatic Classification of Text Complexity. Applied Sciences, 10(20), 7285. https://doi.org/10.3390/app10207285  
+
+- Curto, P., Mamede, N., & Baptista, J. (2015). Automatic Text Difficulty Classifier—Assisting the Selection Of Adequate Reading Materials For European Portuguese Teaching. 36‑44. https://doi.org/10.5220/0005428300360044
+- Santucci, V., Santarelli, F., Forti, L., & Spina, S. (2020). Automatic Classification of Text Complexity. Applied Sciences, 10(20), 7285. https://doi.org/10.3390/app10207285
 
 Other useful papers to correlate findings and provide additional insight :
+
 - Balyan, R., McCarthy, K. S., & McNamara, D. S. (2018). Comparing Machine Learning Classification Approaches for Predicting Expository Text Difficulty. In Grantee Submission. https://eric.ed.gov/?id=ED585216
 - Balyan, R., McCarthy, K. S., & McNamara, D. S. (2020). Applying Natural Language Processing and Hierarchical Machine Learning Approaches to Text Difficulty Classification. International Journal of Artificial Intelligence in Education, 30(3), 337‑370. https://doi.org/10.1007/s40593-020-00201-7
 - Collins, E., Rozanov, N., & Zhang, B. (2018). Evolutionary Data Measures : Understanding the Difficulty of Text Classification Tasks. arXiv:1811.01910 [cs]. http://arxiv.org/abs/1811.01910
@@ -79,3 +149,5 @@ Other useful papers to correlate findings and provide additional insight :
 ### Source of text data
 
 - Niveaux—Delfdalf.ch. (2021). https://www.delfdalf.ch/niveaux
+
+### Milestone 2

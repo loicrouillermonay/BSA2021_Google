@@ -60,12 +60,5 @@ def make_prediction():
     return jsonify({'text': text, 'difficulty': difficulties[int(prediction)]}), 200
 
 
-@app.route('/api/predict', methods=['GET'])
-def make_prediction_of_list():
-    text = request.args.get("text", "")
-    prediction = predict([text], model)
-    return jsonify({'texts': text, 'difficulty': difficulties[int(prediction)]}), 200
-
-
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80)
