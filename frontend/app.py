@@ -28,7 +28,7 @@ def main():
         with st.spinner(text='In progress...'):
             query = {'text': sentence}
             response = requests.get(
-                'http://51.103.168.179/api/predict', params=query)
+                'http://51.103.169.80/api/predict', params=query)
             st.success(
                 f"Difficulty categorized as: {response.json()['difficulty']}")
 
