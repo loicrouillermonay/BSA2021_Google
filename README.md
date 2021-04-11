@@ -93,7 +93,7 @@ Therefore, we had to transform the labels A1 to C2 into numbers from 0 to 5. The
 
 The results of this model are phenomenal. Almost too good to be true. We reach 98% accuracy, and we observe a matrix confusion that is not far from the correct annotated difficulty when there is an error. Even stronger, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
 
-CamemBERT - classification_report:
+CamemBERT - Classification Report
 
 ```python
                           precision    recall  f1-score   support
