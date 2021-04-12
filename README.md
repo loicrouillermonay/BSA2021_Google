@@ -140,13 +140,17 @@ This model is the one we deployed and the one we will do the final training with
 
 ### Deployment
 
-For deployment, a simple Flask API was created that loads the model and predicts a sentence when receiving a request. The API is in the folder "api" of this GitHub repository. The API was Dockerized and published on Docker Hub. Afterward, an Azure Container instance was created, where the Docker Container containing the Flask API with the model was imported and voilà. The API is located at the public address http://51.103.169.80/. Predictions are possible by making a request with the "text" query param KEY and the sentence as VALUE on the address: http://51.103.169.80/api/predict. Be careful, the container does not run constantly to avoid too many costs and the public address may be updated. If this is the case and there is a need to test it, you should write us an email.
+For the deployment of the model, a simple Flask API was created. In effect, it loads the model and predicts a sentence when receiving a request. The API was Dockerized and published on Docker Hub. We imported this Docker Container regrouping the Flask API with the model on an Azure Container created for this purpose. The API is located at the public address http://51.103.169.80/. Predictions can be made through a request with the "text" query param as KEY and the sentence as VALUE on the address: http://51.103.169.80/api/predict. Be careful, the container does not run constantly to avoid superfluous costs and the public address may be updated/changed in the future. If this is the case and there is a need to test it, you should write us an email, we will quickly respond to any of your enquiries.
 
-A big lesson learned was that we could not run our docker container on clouds for a long time because we had Docker on the new macOS with Apple M1 chips. The Docker container architecture was in arm64, and it was not supported on Azure, and Google Cloud Run instances. It sounds simple, but it took a long time to understand because no error message logs understood and targeted this problem.
+_NOTA BENE: The API can be found in the "api" folder of this GitHub repository._
 
-The team did not stop there, first frontend release "Lingorank UI" that is in the folder of the same name in the GitHub repository was deployed. It was created with the Python library "Streamlit". The application is hosted on Heroku. From this interface, it is possible to fill a sentence in a text input, and a request is sent to the API to have an answer in a very user-friendly and interactive way.
+The team did not stop there: we also released a frontend with UI called "Lingorank UI". It can be found in the folder of the same name in the GitHub repository. It was created with the Python library "Streamlit", making it easy to code an MVP, and the application is hosted on Heroku. From this interface, it is possible to write either sole sentences or whole texts in a "text input area". Through that, a request is sent to the API to have an answer in a very user-friendly and interactive way.
 
 https://lingorank-frontend.herokuapp.com/
+
+A big lesson learned during this phase was that we could not make our docker container run on any clouds. This was due to the usage of the new macOS with Apple M1 chips. The Docker container architecture was in arm64, and it was not supported on Azure, and Google Cloud Run instances. It sounds simple, but it took a long time to understand because the error and message logs targeted this problem effectively. A different machine was then used to get around this problem.
+
+
 
 ## 4. Bibliography
 
