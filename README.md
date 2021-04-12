@@ -102,11 +102,11 @@ We continue by trying to integrate Bag-Of-Words. The results are that... tbd.
 
 #### C. CamemBERT For Sequence Classification
 
-The CamemBERT model was proposed in the paper "CamemBERT: a Tasty French Language Model" by Louis Martin, Benjamin Muller, Pedro Javier Ortiz Suárez, Yoann Dupont, Laurent Romary, Éric Villemonte de la Clergerie, Djamé Seddah, and Benoît Sagot. It is based on Facebook’s RoBERTa model released in 2019. (Huggingface, 2021). It is a model trained on 138GB of French text. We used more specifically "CamemBERTForSequenceClassification": it is the CamemBERT Model transformer with a sequence classification/regression head on top. Our thought process is the following: with our knowledge in deep learning, why not take a model that is laready pretrained with French to make a classification. It has in fact been done thanks to a very clear tutorial from the author that has not left any more information on himself aside from his name being Olivier. (“Analyse de sentiments avec CamemBERT,” 2021)
+The CamemBERT model was proposed in the paper "CamemBERT: a Tasty French Language Model" by Louis Martin, Benjamin Muller, Pedro Javier Ortiz Suárez, Yoann Dupont, Laurent Romary, Éric Villemonte de la Clergerie, Djamé Seddah, and Benoît Sagot (2020). It was created based on Facebook’s RoBERTa model, released in 2019. (Huggingface, 2021). It is a model trained on 138GB of French text. For our project, we more specifically used "CamemBERTForSequenceClassification": it is the CamemBERT Model transformer with a sequence classification/regression head on top. Our thought process is the following: with our knowledge in deep learning, why not take a model that is already pretrained with French to make a classification ? We could do it thanks to a very clear tutorial from a person named Oliver. He has not left any more information on himself aside from his name and his tutorial: “Analyse de sentiments avec CamemBERT,” 2021.
 
-Therefore, labels were transformed from A1 to C2 into numbers from 0 to 5. Then, text preprocessing via CamembertTokenizer is done to transform the data into tensors. As a result, we were able to train the model via a GPU instance for about 20 epochs, about 5 hours. At each time, if the loss function improves, the model is saved. This way, it is possible to make separate and multiple training sessions by reloading a model. When a prediction is made, the text has to be tokenized and then transpose it from 0 to 5 again from A1 to C2.
+To use CamemBERT, labels were transformed into numbers. A1 to C2 became 0 to 5. Then, we performed text preprocessing via CamembertTokenizer to transform the data into tensors. As a result, we were able to train the model via a GPU instance for about 20 epochs, about 5 hours. At each interval, if the loss function improves, the model is saved. This way, it is possible to make separate and multiple training sessions by reloading a model. When a prediction is made, the text has to be tokenized and then transposed again, this time from "0 to 5" to "A1 to C2".
 
-The results of this model are excellent: 98% accuracy. We insist on the fact that we double checked that the predictions were made on 10% of the dataset on data that the model has never seen. We also observe a matrix confusion that is not far from the correct annotated difficulty when there is an error. Furthermore, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
+The results of this model are excellent: *98% accuracy* !! We insist on the fact that we double checked that the predictions were made on the 10% of the dataset that the model had never seen. In the confusion matrix, we also observe that when there is an error, it is because the model predicted that the sentence was from an immediately adjacent level. Furthermore, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
 
 CamemBERT - Classification Report
 
@@ -136,7 +136,7 @@ CamemBERT - Confusion Matrix
     [  0,   0,   0,   0,   3, 129]
 ```
 
-This model is the one we deployed and the one we will do the final training with. And if this were to be the final model, the group would have finalized the model, that means it again from scratch on the entire data set with the test dataset included.
+This model is the one we deployed and the one we will do the final training with. The model is considered finalized, meaning it is ready to be trained on the full dataset (including previous test sets).
 
 ### Deployment
 
@@ -175,6 +175,7 @@ Other useful papers to correlate findings and provide additional insight :
 
 - Google Cloud. (2021). Troubleshooting  |  Cloud Run Documentation  |  Google Cloud. https://cloud.google.com/run/docs/troubleshooting
 - Huggingface. (2021). CamemBERT. model_doc/camembert.html
+- Martin, L., Muller, B., Suárez, P. J. O., Dupont, Y., Romary, L., de la Clergerie, É. V., Seddah, D., & Sagot, B. (2020). CamemBERT : A Tasty French Language Model. Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, 7203‑7219. https://doi.org/10.18653/v1/2020.acl-main.645
 - Mahugh, D. (2020, February 17). Deploying a Flask app to Google App Engine. Medium. https://medium.com/@dmahugh_70618/deploying-a-flask-app-to-google-app-engine-faa883b5ffab
 - Nakamura, T. N. (2020, November 5). How to deploy a simple Flask app on Cloud Run with Cloud Endpoint. Medium. https://medium.com/fullstackai/how-to-deploy-a-simple-flask-app-on-cloud-run-with-cloud-endpoint-e10088170eb7
 - Olivier. (2021, January 5). Analyse de sentiments avec CamemBERT. Le Data Scientist. https://ledatascientist.com/analyse-de-sentiments-avec-camembert/
