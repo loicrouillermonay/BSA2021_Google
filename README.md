@@ -77,7 +77,9 @@ _NOTA BENE: All the notebooks for each of the models as well as the one for data
 
 #### A. Google Cloud Platform - Natural Language
 
-This is the simplest solution. All data with a text column and a column with the label were uploaded to Google Storage and then were transmitted to the product "Natural Language". Then Google creates a model by itself via its text classification wizard. The training lasts one day, and the model's accuracy is 61.39%. From the Google Cloud Platform, it is possible in one click to deploy the model and make API calls. There was no fine-tuning possible and this model was kept as a backup if no other predictive model were created.
+This is the simplest solution. All data composed of a text column and a column with the labels were uploaded to Google Storage. It was then transmitted to the "Natural Language" application. There, Google creates a model on its own via its text classification wizard. The training lasts one day and the model's accuracy is 61.39%. 
+
+From the Google Cloud Platform, there is the possibility to deploy the model and make API calls in one click. There was no fine-tuning possible and this model was kept as a backup if no other predictive models could be created. It also served as a kind of "benchmark" to judge of the findings with the other models.
 
 #### B. Features Extraction + Pycaret / & Bag-Of-Words
 
