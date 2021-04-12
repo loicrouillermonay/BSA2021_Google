@@ -62,7 +62,9 @@ Much work has been done on milestone two, and this chapter summarizes it in a pr
 
 ### A quick word on the data
 
-To make it simple, what we will describe in the following chapters, we first did it with our data set that we had collected. However, there was very little data to do anything with and in the end, it was a matter of knowing which model underfitted the least. That is why the strategy shifted a bit and we selected 9174 observations as a merge of our data and those of our colleagues that we found the most qualitative. In this sense, we could finally work on models that were not constantly underfitting to know which one will be chosen for the final milestone of this project, where everyone will train with the same dataset.
+To make it simpler for us, what is described in the following chapter has been first tested and implemented on our own dataset. However, the amount of data proved too insufficient to conduct significant operations. In the end, this method mainly allowed us to find which model underfitted the least. 
+
+That is why the strategy shifted a bit and we selected 9174 observations as a merge of our data and those of our colleagues that we found the most qualitative. In this sense, we could finally work on models that were not constantly underfitting to know which one will be chosen for the final milestone of this project, where everyone will train with the same dataset.
 
 ### Predictive models
 
