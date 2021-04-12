@@ -83,11 +83,11 @@ From the Google Cloud Platform, there is the possibility to deploy the model and
 
 #### B. Features Extraction + Pycaret / & Bag-Of-Words
 
-At this point, the data was taken and we applied what was read in our preliminary research. Various information were extracted about the texts such as sentence length, the number of stopwords per sentence, Part-Of-Speech statistics, and Entity Recognition to create a whole DataFrame of text metadata.
+Here, we applied the methods explained in our preliminary search. Various features were extracted about the texts such as sentence length, the number of stopwords per sentence, Part-Of-Speech statistics, and Entity Recognition. They were all put in a DataFrame of text metadata.
 
-Only based on this metadata, a classification on the labels using the PyCaret library was made. PyCaret is an open-source, low-code machine learning library in Python. It allows, among other things, very easily and quickly to make comparisons between many different algorithms and do more advanced preprocessing on the data. The library also offers an easy way to save predictive models and deploy them.
+Based on that, we used the PyCaret library to classify the labels. It is an open-source, low-code machine learning library in Python. It allows, among many other things, to easily compare different alorithms and perform more advanced preprocessing on the data. The library also offers an easy way to save predictive models and later deploy them.
 
-On only the metadata, the best model being a random forest classifier obtained an accuracy of 53%. We were surprised in good, but we remain dissatisfied when we analyze the matrix confusion. Indeed, there is a too significant proportion of deviation and extreme on the wrong predictions. We have the intuition that the method is not good enough.
+As a result of using the metadata, the best result was obtained from the random forest classifier with an accuracy of 53%. We were positively surprised, altough dissatisfied by the confusion matrix. Indeed, the proportion of deviation and extremes on the wrong predictions is too significant. We have the intuition that the method is not good enough and shouldn't be further refined.
 
 ```Python
 Model                           Accuracy   AUC      Recall    Prec.     TT(Sec)
