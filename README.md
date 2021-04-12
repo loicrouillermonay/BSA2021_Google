@@ -58,7 +58,7 @@ Team Google annotated 1020 sentences for Milestone 1.
 
 ## 4. Synthesis of the work done on Milestone 2
 
-Much work has been done on milestone two, and this chapter summarizes it in a precise and short way. This chapter will first describe our strategy regarding the training data, then explain the creation of three types of models that was done in parallel, then finally how the model was deployed as an an API and a user friendly UI frontend.
+A lot of work was performed for milestone two, and this chapter summarizes it as concisely as possible. It will first describe our strategy regarding the training data, then explain the simulatneous creation of three types of models, and finally how the model was deployed as an API with a user friendly UI frontend.
 
 ### A quick word on the data
 
