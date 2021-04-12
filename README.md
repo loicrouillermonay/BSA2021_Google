@@ -68,12 +68,12 @@ That is why we switched strategy afterwards and selected 9174 observations. They
 
 ### Predictive models
 
-Three types of models were created in parallel to evaluate the results and choose the best one. To put the results in context:
+Three types of models were created in parallel to evaluate the results and choose the best one. Here are the basic metrics for them:
 
 - Base rate: 0.16
 - Default Rate: 0.19
 
-All the notebooks for each of the models and the one for data preparation are in the "notebooks" folder in the GitHub archive.
+_NOTA BENE: All the notebooks for each of the models as well as the one for data preparation can be found in the "notebooks" folder in the GitHub archive._
 
 #### A. Google Cloud Platform - Natural Language
 
