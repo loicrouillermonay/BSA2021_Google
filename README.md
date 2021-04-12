@@ -58,13 +58,13 @@ Team Google annotated 1020 sentences for Milestone 1.
 
 ## 4. Synthesis of the work done on Milestone 2
 
-A lot of work was performed for milestone two, and this chapter summarizes it as concisely as possible. It will first describe our strategy regarding the training data, then explain the simulatneous creation of three types of models, and finally how the model was deployed as an API with a user friendly UI frontend.
+A lot of work was performed for milestone two, so this chapter will summarize it as concisely as possible. Firstly, it will describe our strategy regarding the training data. Secondly, it will then explain the simultaneous creation of three types of models: Google Cloud Platform, Features extraction + Pycaret & BOW and CamemBERT. Lastly, it will cover how the model was deployed as an API with a user friendly UI frontend.
 
 ### A quick word on the data
 
 To make it simpler for us, what is described in the following chapter has been first tested and implemented on our own dataset. However, the amount of data proved too insufficient to conduct significant operations. In the end, this method mainly allowed us to find which model underfitted the least. 
 
-That is why we switched strategy afterwards and selected 9174 observations. They are the result of a merge of our colleagues' data that we found was the most qualitative mixed with ours. This allowed us to "get down to business" and work on models that were not constantly underfitting. This way, we could make a better educated guess about which model was to be chosen for the final milestone of this project, where everyone will have the same dataset to train.
+That is why we switched strategy afterwards and used 9174 observations. They are the result of a merge of our colleagues' data that we found was the most qualitative mixed with ours. This allowed us to "get down to business" and work on models that were not constantly underfitting. This way, we could make a better educated guess about which model was to be chosen for the final milestone of this project, where everyone will have the same dataset to train.
 
 ### Predictive models
 
