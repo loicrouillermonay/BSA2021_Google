@@ -50,7 +50,7 @@ Thus, it has been decided that we will treat this assignment as a classification
 
 Regarding the creation of the model, we will use the resources made available on the Google Cloud. We will first upload the data to the Google Cloud Platform and try to work with Google AutoML; then, if we feel that we are not satisfied with the solution, it would be possible to do things a more manually by creating an instance of AI Platform Notebooks (JupyterLab). It is a virtual machine instance that comes preinstalled with the latest machine learning and data science libraries. If that is the case, we will evaluate algorithms that performed well in the papers we read, such as those highlighted in blue in the research findings Microsoft Word file in the "documents" folder of this repository. Some of those are Logistic Regression, AdaBoost, LDA, SVM, kNN, and Neural Networks.
 
-Then we will have to optimize the model, save the best performing model and deploy it. Those stages will be described in more detail later in the course of the project.
+Then we will have to optimize the model, save the best performing model and deploy it. Those stages will be described in greater detail later in the course of the project.
 
 ## 3. Contribution
 
