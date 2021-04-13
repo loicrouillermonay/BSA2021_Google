@@ -148,7 +148,7 @@ The team did not stop there: we also released a frontend with UI called "Lingora
 
 https://lingorank-frontend.herokuapp.com/
 
-A big lesson learned during this phase was that we could not make our docker container run on any clouds. This was due to the usage of the new macOS with Apple M1 chips. The Docker container architecture was in arm64, and it was not supported on Azure, and Google Cloud Run instances. It sounds simple, but it took a long time to understand because the error and message logs targeted this problem effectively. A different machine was then used to get around this problem.
+A big lesson learned during this phase was that we could not make our docker container run on any clouds. This was due to the usage of the new macOS with Apple M1 chips. The Docker container architecture was in arm64, and it was not supported on Azure, and Google Cloud Run instances. It sounds simple, but it took a long time to understand because the error and message logs did not targeted this problem effectively. A different PC was then used to create a docker container and get around this problem.
 
 
 
