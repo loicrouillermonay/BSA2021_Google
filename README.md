@@ -136,7 +136,7 @@ CamemBERT - Confusion Matrix
     [  0,   0,   0,   0,   3, 129]
 ```
 
-This model is the one we deployed and the one we will do the final training with. The model is considered finalized, meaning it is ready to be trained on the full dataset (including previous test sets).
+This model is the one we deployed and the one we will do the final training with. 
 
 ### Deployment
 
