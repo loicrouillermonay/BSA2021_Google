@@ -98,7 +98,7 @@ K Neighbors Classifier          0.3935     0.7193   0.3988    0.3894    1.712
 Logistic Regression             0.3667     0.7470   0.3760    0.3613    2.044
 ```
 
-We continue by trying to integrate Bag-Of-Words. The results are that... tbd.
+We continue by trying to integrate Bag-Of-Words and are currently working on the following ngrams: 1, 1-2, 1-3. These computations are very time and resource-heavy so we will try to update the results as we get them.
 
 #### C. CamemBERT For Sequence Classification
 
