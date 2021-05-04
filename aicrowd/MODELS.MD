@@ -2,7 +2,7 @@
 
 ## Version 1. (no text preprocessing, batch size = 16)
 
-1. 15 epochs:
+1. 15 epochs: 0.528
 2. 20 epochs:
 3. 25 epochs:
 
