@@ -21,6 +21,8 @@ def main():
     st.markdown("### Lingorank predicts the difficulty of a French written sentence.")
     st.markdown(" Enter your French sentence below")
 
+    templ = [0,0,0,0,0,0,1,1,1,0,2,3,4,5,0,1,2,3,4,5]
+
     # Creating a text box for user input
     sentence = st.text_area(
         "", "Remplacez cette phrase par celle que vous voulez faire analyser.")
@@ -29,13 +31,11 @@ def main():
         with st.spinner(text='In progress...'):
             query = {'text': sentence}
             response = requests.get(
-                'http://51.103.169.80/api/predict', params=query)
+                'http://51.103.141.180/api/predict', params=query)
             st.success(
                 f"Difficulty categorized as: {response.json()['difficulty']}")
-            for w in string.split():
-                if w in sentence:
-                    print
-            
+
+    
 
     
 
