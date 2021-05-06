@@ -2,7 +2,7 @@
 
 The purpose of this document is to document the commands to be used and reused for the different stages of the project.
 
-## Streamlit
+## Streamlit (frontend)
 
 Run app locally
 
@@ -12,7 +12,7 @@ cd ./frontend
 streamlit run app.py
 ```
 
-## Heroku
+## Heroku (frontend)
 
 Login to Heroku
 
@@ -32,7 +32,7 @@ Push the frontend to Heroku
 git subtree push --prefix frontend heroku-lingorank-frontend master
 ```
 
-## Docker
+## Docker (backend)
 
 Build image from Dockerfile
 
@@ -58,6 +58,6 @@ Push the image to registry
 docker push YOUR-USERNAME/bsa-backend:v1
 ```
 
-## Microsoft Azure - Container Instances
+## Microsoft Azure - Container Instances (backend)
 
 To host the LingoRank backend. You have to connect to the Azure Portal and create a "Container Instance" with the Docker image that has been uploaded on your personal Dockerhub via the manipulations described in the chapter "Docker" above.
