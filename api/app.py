@@ -14,7 +14,7 @@ app.config["DEBUG"] = False
 
 
 def get_model():
-    state_dict = torch.load("./lingorank", map_location=torch.device('cpu'))
+    state_dict = torch.load("./lingorank.pt", map_location=torch.device('cpu'))
     model = CamembertForSequenceClassification.from_pretrained(
         'camembert-base',
         state_dict=state_dict,
