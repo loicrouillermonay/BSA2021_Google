@@ -61,7 +61,7 @@ def make_prediction():
 
 
 @app.route('/api/predict/words', methods=['GET'])
-def make_prediction():
+def make_prediction_words():
     text = request.args.get("text", "")
     predictions = predict(text.split(' '), model)
     words = []
