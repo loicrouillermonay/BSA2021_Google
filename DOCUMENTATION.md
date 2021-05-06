@@ -37,6 +37,8 @@ git subtree push --prefix frontend heroku-lingorank-frontend master
 Build image from Dockerfile
 
 ```console
+cd ./api
+
 docker build -t lingorank_backend .
 ```
 
