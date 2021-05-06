@@ -17,12 +17,13 @@ def streamlit_config():
 def main():
     """BSA 2021: Team Google - Lingorank frontend"""
     streamlit_config()
-    st.title("Lingorank UI v2.0")
-    st.text(" Lingorank predicts the difficulty of a French written sentence.")
+    st.markdown("# Lingorank UI v2.0")
+    st.markdown("### Lingorank predicts the difficulty of a French written sentence.")
+    st.markdown(" Enter your French sentence below")
 
     # Creating a text box for user input
     sentence = st.text_area(
-        "Enter a French written sentence.", "Entrez votre phrase ici.")
+        "", "Remplacez cette phrase par celle que vous voulez faire analyser.")
 
     if st.button("Classify"):
         with st.spinner(text='In progress...'):
@@ -31,6 +32,12 @@ def main():
                 'http://51.103.169.80/api/predict', params=query)
             st.success(
                 f"Difficulty categorized as: {response.json()['difficulty']}")
+            for w in string.split():
+                if w in sentence:
+                    print
+            
+
+    
 
 
 # Required to let Streamlit instantiate our web app.
