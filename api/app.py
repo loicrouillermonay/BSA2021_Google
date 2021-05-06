@@ -14,7 +14,7 @@ app.config["DEBUG"] = False
 
 
 def get_model():
-    state_dict = torch.load("./lingorank_v1", map_location=torch.device('cpu'))
+    state_dict = torch.load("./lingorank", map_location=torch.device('cpu'))
     model = CamembertForSequenceClassification.from_pretrained(
         'camembert-base',
         state_dict=state_dict,
@@ -58,6 +58,17 @@ def make_prediction():
     text = request.args.get("text", "")
     prediction = predict([text], model)
     return jsonify({'text': text, 'difficulty': difficulties[int(prediction)]}), 200
+
+
+@app.route('/api/predict/words', methods=['GET'])
+def make_prediction():
+    text = request.args.get("text", "")
+    predictions = predict(text.split(' '), model)
+    words = []
+    for prediction in predictions:
+        words.append(int(prediction))
+
+    return jsonify({'text': text, 'difficulty': words, 200
 
 
 if __name__ == '__main__':
