@@ -21,11 +21,9 @@
 
 - 21 epochs: 0.541
 
-## Version 5. (text preprocessing, batch size = 16)
+## Version 5. (text preprocessing, batch size = 4)
 
-1. 15 epochs:
-2. 20 epochs:
-3. 25 epochs:
+- ~30 epochs:
 
 ## Version 6. (text preprocessing, batch size = 24)
 
