@@ -67,8 +67,7 @@ def make_prediction():
     words = []
     for prediction in predictions:
         words.append(int(prediction))
-
-    return jsonify({'text': text, 'difficulty': words, 200
+    return jsonify({'text': text, 'difficulty': words}), 200
 
 
 if __name__ == '__main__':
