@@ -19,9 +19,7 @@
 
 ## Version 4. (text preprocessing, batch size = 8)
 
-1. 15 epochs:
-2. 20 epochs:
-3. 25 epochs:
+- 21 epochs: 0.541
 
 ## Version 5. (text preprocessing, batch size = 16)
 
@@ -29,9 +27,10 @@
 2. 20 epochs:
 3. 25 epochs:
 
-## Version 6. (text preprocessing, batch size = 32)
+## Version 6. (text preprocessing, batch size = 24)
 
 - 30 epochs: 0.543
+- 45 epochs: 0.528
 
 # Pycaret
 
