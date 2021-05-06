@@ -17,7 +17,7 @@ def streamlit_config():
 def main():
     """BSA 2021: Team Google - Lingorank frontend"""
     streamlit_config()
-    st.title("Lingorank UI")
+    st.title("Lingorank UI v2.0")
     st.text(" Lingorank predicts the difficulty of a French written sentence.")
 
     # Creating a text box for user input
