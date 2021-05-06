@@ -8,6 +8,7 @@ Run app locally
 
 ```console
 cd ./frontend
+
 streamlit run app.py
 ```
 
