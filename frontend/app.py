@@ -9,6 +9,7 @@ def streamlit_config():
             <style>
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
+            span {border-radius: 8px}
             </style>
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
