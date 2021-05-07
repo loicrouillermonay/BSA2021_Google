@@ -9,7 +9,13 @@ def streamlit_config():
             <style>
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
-            span {border-radius: 8px}
+            span {border-radius: 8px;}
+            .dark-green {background-color:#2E541A;}
+            .light-green {background-color:#6C8A1A;}
+            .yellow {background-color:#F7C32D;}
+            .orange {background-color:#DE700F;}
+            .red {background-color:#B21F01;}
+            .dark-red {background-color:#7B1200;}
             </style>
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
@@ -18,7 +24,7 @@ def streamlit_config():
 def main():
     """BSA 2021: Team Google - Lingorank frontend"""
     streamlit_config()
-    st.markdown("# Lingorank UI v2.0")
+    st.markdown("# Lingorank Web App")
     st.markdown("### Lingorank predicts the difficulty of a French written sentence.")
     st.markdown(" Enter your French sentence below")
 
@@ -49,12 +55,12 @@ def main():
             <i>NOTA BENE :</i> Level is usually low because words are analyzed without their context 
             <br> <br>
             <div style="text-align:center"> Label : 
-            <span style = 'background-color:#2E541A'>[ A1 ]</span> - 
-            <span style = 'background-color:#6C8A1A'>[ A2 ]</span> - 
-            <span style = 'background-color:#F7C32D'>[ B1 ]</span> - 
-            <span style = 'background-color:#DE700F'>[ B2 ]</span> - 
-            <span style = 'background-color:#B21F01'>[ C1 ]</span> - 
-            <span style = 'background-color:#7B1200'>[ C2 ]</span>
+            <span class = 'dark-green'>[ A1 ]</span> - 
+            <span class = 'light-green'>[ A2 ]</span> - 
+            <span class = 'yellow'>[ B1 ]</span> - 
+            <span class = 'orange'>[ B2 ]</span> - 
+            <span class = 'red'>[ C1 ]</span> - 
+            <span class = 'dark-red'>[ C2 ]</span>
             </div> <br>
             '''
             
@@ -64,17 +70,17 @@ def main():
             output = ""
             for i in bloc:
                 if(difficulties[index] == 0):
-                    output = output + "<span style = 'background-color:#2E541A'>" + bloc[index] + "</span>" + " "
+                    output = output + "<span class = 'dark-green'>" + bloc[index] + " </span>"
                 if(difficulties[index] == 1):
-                    output = output + "<span style = 'background-color:#6C8A1A'>" + bloc[index] + "</span>" + " "
+                    output = output + "<span class = 'light-green'>" + bloc[index] + " </span>"
                 if(difficulties[index] == 2):
-                    output = output + "<span style = 'background-color:#F7C32D'>" + bloc[index] + "</span>" + " "
+                    output = output + "<span class = 'yellow'>" + bloc[index] + " </span>"
                 if(difficulties[index] == 3):
-                    output = output + "<span style = 'background-color:#DE700F'>" + bloc[index] + "</span>" + " "
+                    output = output + "<span class = 'orange'>" + bloc[index] + " </span>"
                 if(difficulties[index] == 4):
-                    output = output + "<span style = 'background-color:#B21F01'>" + bloc[index] + "</span>" + " "
+                    output = output + "<span class = 'red'>" + bloc[index] + " </span>"
                 if(difficulties[index] == 5):
-                    output = output + "<span style = 'background-color:#7B1200'>" + bloc[index] + "</span>" + " "
+                    output = output + "<span class = 'dark-red'>" + bloc[index] + " </span>"
 
                 index = index + 1
             # Display caption and sentence with indificual difficulties
