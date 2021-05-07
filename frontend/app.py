@@ -11,12 +11,12 @@ def streamlit_config():
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             span {border-radius: 8px;}
-            .dark-green {background-color:green;}
-            .light-green {background-color:#6C8A1A;}
-            .yellow {background-color:#F7C32D;}
-            .orange {background-color:#DE700F;}
-            .red {background-color:#B21F01;}
-            .dark-red {background-color:red;}
+            .dark-green {background-color: green;}
+            .light-green {background-color: #6C8A1A;}
+            .yellow {background-color: #F7C32D;}
+            .orange {background-color: #DE700F;}
+            .red {background-color: #B21F01;}
+            .dark-red {background-color: red;}
             </style>
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
