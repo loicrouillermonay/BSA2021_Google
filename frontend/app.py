@@ -4,7 +4,8 @@ import requests
 
 def streamlit_config():
     st.set_page_config(
-        page_title='Lingorank')
+        page_title = 'Lingorank')
+    # In-page style
     hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -18,7 +19,7 @@ def streamlit_config():
             .dark-red {background-color:#7B1200;}
             </style>
             """
-    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+    st.markdown(hide_streamlit_style, unsafe_allow_html = True)
 
 
 def main():
@@ -37,23 +38,24 @@ def main():
     # Create the button
     if st.button("Classify"):
         # On click, display waiting message while querying
-        with st.spinner(text='Processing overall sentence difficulty...'):
+        with st.spinner(text = 'Processing overall sentence difficulty...'):
             # Query request and response with overall difficulty
             query = {'text': sentence}
             response = requests.get(
-                api+'predict', params=query)
+                api+'predict', params = query)
                 # Display the result of the query
             st.success(
                 f"Succesfully categorized overall difficulty as: **{response.json()['difficulty']}**")
         # After the success of the previous operation, perform a second query with individual words difficulty
-        with st.spinner(text='Processing individual words difficulty'):
+        st.markdown("<hr>", unsafe_allow_html=True)
+        with st.spinner(text = 'Processing individual words difficulty'):
             response_diff = requests.get(
-                api+'predict/words', params=query)
+                api+'predict/words', params = query)
             # Assign list of individual difficulty to a variable
             difficulties = response_diff.json()['difficulty']
 
             # Some layout
-            caption = '''<hr><h4>Find here the individual difficulty of words. Background color varies depending on the level.</h4> 
+            caption = '''<h4>Find here the individual difficulty of words. Background color varies depending on the level.</h4> 
             <i>NOTA BENE :</i> Level is usually low because words are analyzed without their context 
             <br> <br>
             <div style="text-align:center"> Label : 
