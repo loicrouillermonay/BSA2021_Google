@@ -45,5 +45,5 @@ _text preprocessing, batch size = 24_
 # Pycaret
 
 - Extra Trees Classifier: 0.425
-- Logistic Regression: tbd.
+- Logistic Regression: 0.417
 - CatBoost Classifier: 0.411
