@@ -32,6 +32,8 @@ def main():
     sentence = st.text_area(
         "", "Remplacez cette phrase par celle que vous voulez faire analyser.")
 
+    api = "http://51.103.167.205/api/"
+
     # Create the button
     if st.button("Classify"):
         # On click, display waiting message while querying
@@ -39,14 +41,14 @@ def main():
             # Query request and response with overall difficulty
             query = {'text': sentence}
             response = requests.get(
-                'http://51.103.167.205/api/predict', params=query)
+                api+'predict', params=query)
                 # Display the result of the query
             st.success(
                 f"Succesfully categorized overall difficulty as: **{response.json()['difficulty']}**")
         # After the success of the previous operation, perform a second query with individual words difficulty
         with st.spinner(text='Processing individual words difficulty'):
             response_diff = requests.get(
-                'http://51.103.167.205/api/predict/words', params=query)
+                api+'predict/words', params=query)
             # Assign list of individual difficulty to a variable
             difficulties = response_diff.json()['difficulty']
 
@@ -84,9 +86,9 @@ def main():
 
                 index = index + 1
             # Display caption and sentence with indificual difficulties
-            st.markdown(caption, unsafe_allow_html=True)
+            st.markdown(caption, unsafe_allow_html = True)
             output = "<i>" + output + "</i>"
-            st.markdown(output, unsafe_allow_html=True)
+            st.markdown(output, unsafe_allow_html = True)
     
 
     
