@@ -48,7 +48,7 @@ def main():
             caption = '''<hr><h4>Find here the individual difficulty of words. Background color varies depending on the level.</h4> 
             <i>NOTA BENE :</i> Level is usually low because words are analyzed without their context 
             <br> <br>
-            <div style="text-align:center"> Caption : 
+            <div style="text-align:center"> Label : 
             <span style = 'background-color:#2E541A'>[ A1 ]</span> - 
             <span style = 'background-color:#6C8A1A'>[ A2 ]</span> - 
             <span style = 'background-color:#F7C32D'>[ B1 ]</span> - 
