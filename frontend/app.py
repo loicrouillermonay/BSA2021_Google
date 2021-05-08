@@ -57,7 +57,7 @@ def main():
 
             # Some layout
             caption = '''<h4>Find here the individual difficulty of words. Background color varies depending on the level.</h4> 
-            <i>NOTA BENE :</i> Difficulty level of words are usually low and far from the predicted difficulty of the sentence because this process does not take into account the relationship between the words.
+            <i>NOTA BENE :</i> Difficulty levels of words are usually low and far from the predicted difficulty of the sentence because this process does not take into account the relationship between the words.
             <br> <br>
             <div style="text-align:center"> Label : 
             <span class = 'dark-green'>[ A1 ]</span> - 

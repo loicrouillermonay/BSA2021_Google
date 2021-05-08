@@ -38,6 +38,10 @@ Secondly, we apply our data collection strategy.
 
 The second milestone is to create a predictive model that can predict how easy or difficult a french sentence is. At the end of the milestone, the deliverable is a callable API point which, given a text in French, will return its difficulty. Part of the exercise is to create an API, dockerize the solution and use cloud services.
 
+### Milestone 3 - Iterate/improve & AIcrowd
+
+The purpose of this milestone is to improve the models and make submissions to the AIcrowd private competition. In parallel to that, the UI and the documentation are improved.
+
 ## 2. Approach to solve the problem
 
 To solve the problem of creating a predictive model, we will use a method inspired from the papers we have read and learned in the research findings mentioned at the end of the readme. The method is described in the following paragraphs.
@@ -60,13 +64,13 @@ Team Google annotated 1020 sentences for Milestone 1.
 
 A lot of work was performed for milestone two, so this chapter will summarize it as concisely as possible. Firstly, it will describe our strategy regarding the training data. Secondly, it will then explain the simultaneous creation of three types of models: Google Cloud Platform, Features extraction + Pycaret & BOW and CamemBERT. Lastly, it will cover how the model was deployed as an API with a user friendly UI frontend.
 
-### A quick word on the data
+### 4.1 A quick word on the data
 
-To make it simpler for us, what is described in the following chapter has been first tested and implemented on our own dataset. However, the amount of data proved too insufficient to conduct significant operations. In the end, this method mainly allowed us to find which model underfitted the least. 
+To make it simpler for us, what is described in the following chapter has been first tested and implemented on our own dataset. However, the amount of data proved too insufficient to conduct significant operations. In the end, this method mainly allowed us to find which model underfitted the least.
 
 That is why we switched strategy afterwards and used 9174 observations. They are the result of a merge of our colleagues' data that we found was the most qualitative mixed with ours. This allowed us to "get down to business" and work on models that were not constantly underfitting. This way, we could make a better educated guess about which model was to be chosen for the final milestone of this project, where everyone will have the same dataset to train.
 
-### Predictive models
+### 4.2 Predictive models
 
 Three types of models were created in parallel to evaluate the results and choose the best one. Here are the basic metrics for them:
 
@@ -77,7 +81,7 @@ _NOTA BENE: All the notebooks for each of the models as well as the one for data
 
 #### A. Google Cloud Platform - Natural Language
 
-This is the simplest solution. All data composed of a text column and a column with the labels were uploaded to Google Storage. It was then transmitted to the "Natural Language" application. There, Google creates a model on its own via its text classification wizard. The training lasts one day and the model's accuracy is 61.39%. 
+This is the simplest solution. All data composed of a text column and a column with the labels were uploaded to Google Storage. It was then transmitted to the "Natural Language" application. There, Google creates a model on its own via its text classification wizard. The training lasts one day and the model's accuracy is 61.39%.
 
 From the Google Cloud Platform, there is the possibility to deploy the model and make API calls in one click. There was no fine-tuning possible and this model was kept as a backup if no other predictive models could be created. It also served as a kind of "benchmark" to judge of the findings with the other models.
 
@@ -106,7 +110,7 @@ The CamemBERT model was proposed in the paper "CamemBERT: a Tasty French Languag
 
 To use CamemBERT, labels were transformed into numbers. A1 to C2 became 0 to 5. Then, we performed text preprocessing via CamembertTokenizer to transform the data into tensors. As a result, we were able to train the model via a GPU instance for about 20 epochs, about 5 hours. At each interval, if the loss function improves, the model is saved. This way, it is possible to make separate and multiple training sessions by reloading a model. When a prediction is made, the text has to be tokenized and then transposed again, this time from "0 to 5" to "A1 to C2".
 
-The results of this model are excellent: *98% accuracy* !! We insist on the fact that we double checked that the predictions were made on the 10% of the dataset that the model had never seen. In the confusion matrix, we also observe that when there is an error, it is because the model predicted that the sentence was from an immediately adjacent level. Furthermore, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
+The results of this model are excellent: _98% accuracy_ !! We insist on the fact that we double checked that the predictions were made on the 10% of the dataset that the model had never seen. In the confusion matrix, we also observe that when there is an error, it is because the model predicted that the sentence was from an immediately adjacent level. Furthermore, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
 
 CamemBERT - Classification Report
 
@@ -136,9 +140,9 @@ CamemBERT - Confusion Matrix
     [  0,   0,   0,   0,   3, 129]
 ```
 
-This model is the one we deployed and the one we will do the final training with. 
+This model is the one we deployed and the one we will do the final training with.
 
-### Deployment
+### 4.3 Deployment
 
 For the deployment of the model, a simple Flask API was created. In effect, it loads the model and predicts a sentence when receiving a request. The API was Dockerized and published on Docker Hub. We imported this Docker Container regrouping the Flask API with the model on an Azure Container created for this purpose. The API is located at the public address http://51.103.169.80/. Predictions can be made through a request with the "text" query param as KEY and the sentence as VALUE on the address: http://51.103.169.80/api/predict. Be careful, the container does not run constantly to avoid superfluous costs and the public address may be updated/changed in the future. If this is the case and there is a need to test it, you should write us an email, we will quickly respond to any of your enquiries.
 
@@ -150,9 +154,34 @@ https://lingorank-frontend.herokuapp.com/
 
 A big lesson learned during this phase was that we could not make our docker container run on any clouds. This was due to the usage of the new macOS with Apple M1 chips. The Docker container architecture was in arm64, and it was not supported on Azure, and Google Cloud Run instances. It sounds simple, but it took a long time to understand because the error and message logs did not targeted this problem effectively. A different PC was then used to create a docker container and get around this problem.
 
+## 5. Synthesis of the work done on Milestone 3
 
+A folder named aicrowd has been created where all the models have been adapted for the competition. There, the results of the submissions are gathered, as well as the notebooks used to prepare the data and train the models.
 
-## 4. Bibliography
+### 5.1 CamemBERT on AIcrowd
+
+There is not enough data to effectively train this model in the aicrowd competition. However, after multiple attempts, we noticed that the results were better when we had a small batch size, and no text processing was done at all.
+
+### 5.2 Cognates
+
+All sentences have been translated into English using the Google Translate API. Then, multiple algorithms of distance calculation between the difference of string were applied to the whole sentences. These elements were then added to the data used in the Pycaret model, and we notice a slight increase in accuracy. The cognates are, therefore, helpful.
+
+```Python
+Model                           Accuracy   AUC      Recall    Prec.     TT(Sec)
+Extra Trees Classifier          0.5629     0.8613   0.5694    0.5605    1.392
+Random Forest Classifier        0.5577     0.8563   0.5624    0.5504    1.690
+CatBoost Classifier             0.5349     0.8292   0.5367    0.5311    27.454
+Light Gradient Boosting Machine 0.5276     0.8279   0.5290    0.5294    1.596
+Decision Tree Classifier        0.4781     0.6879   0.4779    0.4774    0.138
+```
+
+### 5.3 Lingorank Web App
+
+The UI has been improved and now displays the perceived difficulty of each word by the model. The difficulty levels of words are usually low and far from the predicted difficulty of the sentence because this process does not take into account the relationship between the words.
+
+### 5.4 Next steps
+
+## 6. Bibliography
 
 ### Papers
 

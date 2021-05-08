@@ -9,11 +9,10 @@ _no text preprocessing, batch size = 16_
 
 ## Version 2.
 
-_no text preprocessing, batch size = 32_
+_no text preprocessing, batch size = 4_
 
-1. 15 epochs:
-2. 20 epochs:
-3. 25 epochs:
+- 20 epochs: 0.585
+- 25 epochs:
 
 ## Version 3.
 
