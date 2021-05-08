@@ -102,7 +102,7 @@ K Neighbors Classifier          0.3935     0.7193   0.3988    0.3894    1.712
 Logistic Regression             0.3667     0.7470   0.3760    0.3613    2.044
 ```
 
-We continue by trying to integrate Bag-Of-Words and are currently working on the following ngrams: 1, 1-2, 1-3. These computations are very time and resource-heavy so we will try to update the results as we get them.
+The use of the Bag-Of-Words technique was tried for a week but proved impractical due to the explosion of the observation space and the difficulty of training a model, even using PCA. We decided to use only the features extracted from the text.
 
 #### C. CamemBERT For Sequence Classification
 
@@ -160,11 +160,11 @@ A folder named aicrowd has been created where all the models have been adapted f
 
 ### 5.1 CamemBERT on AIcrowd
 
-There is not enough data to effectively train this model in the aicrowd competition. However, after multiple attempts, we noticed that the results were better when we had a small batch size, and no text processing was done at all.
+There is not enough data to effectively train this model in the aicrowd competition. However, after multiple attempts, we noticed that the results were better when we had a smaller batch size, and no text processing at all.
 
-### 5.2 Cognates
+### 5.2 Cognates + Features Extraction + Pycaret
 
-All sentences have been translated into English using the Google Translate API. Then, multiple algorithms of distance calculation between the difference of string were applied to the whole sentences. These elements were then added to the data used in the Pycaret model, and we notice a slight increase in accuracy. The cognates are, therefore, helpful. However, based on the results of aicrowd, we are still far from the performance of CamemBERT.
+All sentences have been translated into English using the Google Translate API. Then, multiple algorithms of distance calculation between the difference of string were applied to the whole sentences. These elements were then added to the data used in the Pycaret model, and we notice an increase in accuracy. The cognates are, therefore, helpful. However, based on the results of aicrowd, we are still far from the performance of CamemBERT.
 
 ```Python
 Model                           Accuracy   AUC      Recall    Prec.     TT(Sec)
