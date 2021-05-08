@@ -18,9 +18,7 @@ _no text preprocessing, batch size = 4_
 
 _no text preprocessing, batch size = 8_
 
-1. 15 epochs:
-2. 20 epochs:
-3. 25 epochs:
+- 26 epochs: 0.546
 
 ## Version 4.
 
@@ -44,5 +42,5 @@ _text preprocessing, batch size = 24_
 # Pycaret
 
 - Extra Trees Classifier: 0.425
-- Logistic Regression: tbd.
+- Logistic Regression: 0.417
 - CatBoost Classifier: 0.411
