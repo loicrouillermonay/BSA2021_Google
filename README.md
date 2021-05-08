@@ -164,7 +164,7 @@ There is not enough data to effectively train this model in the aicrowd competit
 
 ### 5.2 Cognates
 
-All sentences have been translated into English using the Google Translate API. Then, multiple algorithms of distance calculation between the difference of string were applied to the whole sentences. These elements were then added to the data used in the Pycaret model, and we notice a slight increase in accuracy. The cognates are, therefore, helpful.
+All sentences have been translated into English using the Google Translate API. Then, multiple algorithms of distance calculation between the difference of string were applied to the whole sentences. These elements were then added to the data used in the Pycaret model, and we notice a slight increase in accuracy. The cognates are, therefore, helpful. However, based on the results of aicrowd, we are still far from the performance of CamemBERT.
 
 ```Python
 Model                           Accuracy   AUC      Recall    Prec.     TT(Sec)
@@ -180,6 +180,8 @@ Decision Tree Classifier        0.4781     0.6879   0.4779    0.4774    0.138
 The UI has been improved and now displays the perceived difficulty of each word by the model. The difficulty levels of words are usually low and far from the predicted difficulty of the sentence because this process does not take into account the relationship between the words.
 
 ### 5.4 Next steps
+
+The next steps are to train a few different versions of the models to send to AIcrowd to see potential improvements in our score, improve the UI by adding a tab to visualize the intensity of cognates within a sentence, adjust the project according to the evaluation criteria and prepare the final presentation.
 
 ## 6. Bibliography
 
