@@ -34,7 +34,7 @@ def main():
     sentence = st.text_area(
         "", "Remplacez cette phrase par celle que vous voulez faire analyser.")
 
-    api = "http://51.103.167.205/api/"
+    api = "http://51.103.156.182/api/"
 
     # Create the button
     if st.button("Classify"):
