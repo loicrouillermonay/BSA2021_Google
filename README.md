@@ -206,13 +206,14 @@ The next steps are to train a few different versions of the models to send to AI
 
 ### 6.1 General Architecture
 
-You can find in the figure below the general architecture of this project. 
-- For the Backend, data is first processed by the CamemBERT model. It can then be interacted with thanks to a Flask API that was dockerized. 
+You can find the general architecture of this project in the figure below. 
+- For the Backend, data is first processed by the CamemBERT model. It can then be interacted with thanks to a Flask API that was dockerized and put on Docker HUB. 
 - For the frontend, the web app is developed with the Streamlit library and hosted on heroku. 
-- Backend and Frontend are then hosted on an Azure cloud container to be available online.
+- Backend and Frontend interact thanks to an Azure Cloud container that downloads the model from Docker HUB and uses GET requests with Heroku.
 
-# **Insert Figure**
-
+<div align="middle">
+<img src="/documents/LingoRank_Architecture.svg" alt="Architecture" width = 75%>
+</div>
 
 ### 6.2 Instructions from A to Z on how to train, deploy and use the model
 
