@@ -146,7 +146,7 @@ This model is the one we deployed and the one we will do the final training with
 
 For the deployment of the model, a simple Flask API was created. In effect, it loads the model and predicts a sentence when receiving a request. The API was Dockerized and published on Docker Hub. We imported this Docker Container regrouping the Flask API with the model on an Azure Container created for this purpose. The API is located at the public address http://51.103.169.80/. Predictions can be made through a request with the "text" query param as KEY and the sentence as VALUE on the address: http://51.103.169.80/api/predict. Be careful, the container does not run constantly to avoid superfluous costs and the public address may be updated/changed in the future. If this is the case and there is a need to test it, you should write us an email, we will quickly respond to any of your enquiries.
 
-_NOTA BENE: The API can be found in the "api" folder of this GitHub repository._
+_NOTA BENE: The API and documentation (ReadMe) on how to use it can be found in the "api" folder of this GitHub repository._
 
 The team did not stop there: we also released a frontend with UI called "Lingorank UI". It can be found in the folder of the same name in the GitHub repository. It was created with the Python library "Streamlit", making it easy to code an MVP, and the application is hosted on Heroku. From this interface, it is possible to write either sole sentences or whole texts in a "text input area". Through that, a request is sent to the API to have an answer in a very user-friendly and interactive way.
 
@@ -183,7 +183,22 @@ The UI has been improved and now displays the perceived difficulty of each word 
 
 The next steps are to train a few different versions of the models to send to AIcrowd to see potential improvements in our score, improve the UI by adding a tab to visualize the intensity of cognates within a sentence, adjust the project according to the evaluation criteria and prepare the final presentation.
 
-## 6. Bibliography
+## 6. Last Milestone : Conclusion of the project & General administrative information
+
+### 6.1 General Architecture
+
+You can find in the figure below the general architecture of this project. 
+- For the Backend, data is first processed by the CamemBERT model. It can then be interacted with thanks to a Flask API that was dockerized. 
+- For the frontend, the web app is developed with the Streamlit library and hosted on heroku. 
+- Backend and Frontend are then hosted on an Azure cloud container to be available online.
+
+# Insert Figure
+
+
+### 6.2 
+
+
+## 7. Bibliography
 
 ### Papers
 
