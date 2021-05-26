@@ -1,8 +1,9 @@
 # Big-Scale Analytics 2021 - Team Google
 
-- Francis Ruckstuhl
 - David Netter
+- Francis Ruckstuhl
 - Loïc Rouiller-Monay
+
 
 ## 1. Introduction
 
@@ -24,6 +25,7 @@ can improve.
 
 The project is conducted in multiple milestones that are due throughout the semester.
 
+
 ### Milestone 1 - Reading/Thinking & Gathering the data
 
 The first milestone is to research the subject by reading scientific publications in order to be able to think about how to solve the problem. We ask ourselves questions such as:
@@ -34,13 +36,16 @@ The first milestone is to research the subject by reading scientific publication
 
 Secondly, we apply our data collection strategy.
 
+
 ### Milestone 2 - Creating/Evaluating the model
 
 The second milestone is to create a predictive model that can predict how easy or difficult a french sentence is. At the end of the milestone, the deliverable is a callable API point which, given a text in French, will return its difficulty. Part of the exercise is to create an API, dockerize the solution and use cloud services.
 
+
 ### Milestone 3 - Iterate/improve & AIcrowd
 
 The purpose of this milestone is to improve the models and make submissions to the AIcrowd private competition. In parallel to that, the UI and the documentation are improved.
+
 
 ## 2. Approach to solve the problem
 
@@ -56,19 +61,23 @@ Regarding the creation of the model, we will use the resources made available on
 
 Then we will have to optimize the model, save the best performing model and deploy it. Those stages will be described in greater detail later in the course of the project.
 
+
 ## 3. Contribution
 
 Team Google annotated 1020 sentences for Milestone 1.
 
+
 ## 4. Synthesis of the work done on Milestone 2
 
 A lot of work was performed for milestone two, so this chapter will summarize it as concisely as possible. Firstly, it will describe our strategy regarding the training data. Secondly, it will then explain the simultaneous creation of three types of models: Google Cloud Platform, Features extraction + Pycaret & BOW and CamemBERT. Lastly, it will cover how the model was deployed as an API with a user friendly UI frontend.
+
 
 ### 4.1 A quick word on the data
 
 To make it simpler for us, what is described in the following chapter has been first tested and implemented on our own dataset. However, the amount of data proved too insufficient to conduct significant operations. In the end, this method mainly allowed us to find which model underfitted the least.
 
 That is why we switched strategy afterwards and used 9174 observations. They are the result of a merge of our colleagues' data that we found was the most qualitative mixed with ours. This allowed us to "get down to business" and work on models that were not constantly underfitting. This way, we could make a better educated guess about which model was to be chosen for the final milestone of this project, where everyone will have the same dataset to train.
+
 
 ### 4.2 Predictive models
 
@@ -79,11 +88,13 @@ Three types of models were created in parallel to evaluate the results and choos
 
 _NOTA BENE: All the notebooks for each of the models as well as the one for data preparation can be found in the "notebooks" folder in the GitHub archive._
 
+
 #### A. Google Cloud Platform - Natural Language
 
 This is the simplest solution. All data composed of a text column and a column with the labels were uploaded to Google Storage. It was then transmitted to the "Natural Language" application. There, Google creates a model on its own via its text classification wizard. The training lasts one day and the model's accuracy is 61.39%.
 
 From the Google Cloud Platform, there is the possibility to deploy the model and make API calls in one click. There was no fine-tuning possible and this model was kept as a backup if no other predictive models could be created. It also served as a kind of "benchmark" to judge of the findings with the other models.
+
 
 #### B. Features Extraction + Pycaret / & Bag-Of-Words
 
@@ -103,6 +114,7 @@ Logistic Regression             0.3667     0.7470   0.3760    0.3613    2.044
 ```
 
 The use of the Bag-Of-Words technique was tried for a week but proved impractical due to the explosion of the observation space and the difficulty of training a model, even using PCA. We decided to use only the features extracted from the text.
+
 
 #### C. CamemBERT For Sequence Classification
 
@@ -142,9 +154,10 @@ CamemBERT - Confusion Matrix
 
 This model is the one we deployed and the one we will do the final training with.
 
+
 ### 4.3 Deployment
 
-For the deployment of the model, a simple Flask API was created. In effect, it loads the model and predicts a sentence when receiving a request. The API was Dockerized and published on Docker Hub. We imported this Docker Container regrouping the Flask API with the model on an Azure Container created for this purpose. The API is located at the public address http://51.103.169.80/. Predictions can be made through a request with the "text" query param as KEY and the sentence as VALUE on the address: http://51.103.169.80/api/predict. Be careful, the container does not run constantly to avoid superfluous costs and the public address may be updated/changed in the future. If this is the case and there is a need to test it, you should write us an email, we will quickly respond to any of your enquiries.
+For the deployment of the model, a simple Flask API was created. In effect, it loads the model and predicts a sentence when receiving a request. The API was Dockerized and published on Docker Hub. We imported this Docker Container regrouping the Flask API with the model on an Azure Container created for this purpose. The API is located at the public address http://51.103.156.182/. Predictions can be made through a request with the "text" query param as KEY and the sentence as VALUE on the address: http://51.103.156.182/api/predict. Be careful, the container does not run constantly to avoid superfluous costs and the public address may be updated/changed in the future. If this is the case and there is a need to test it, you should write us an email, we will quickly respond to any of your enquiries.
 
 _NOTA BENE: The API and documentation (ReadMe) on how to use it can be found in the "api" folder of this GitHub repository._
 
@@ -154,17 +167,20 @@ https://lingorank-frontend.herokuapp.com/
 
 A big lesson learned during this phase was that we could not make our docker container run on any clouds. This was due to the usage of the new macOS with Apple M1 chips. The Docker container architecture was in arm64, and it was not supported on Azure, and Google Cloud Run instances. It sounds simple, but it took a long time to understand because the error and message logs did not targeted this problem effectively. A different PC was then used to create a docker container and get around this problem.
 
+
 ## 5. Synthesis of the work done on Milestone 3
 
 A folder named aicrowd has been created where all the models have been adapted for the competition. There, the results of the submissions are gathered, as well as the notebooks used to prepare the data and train the models.
+
 
 ### 5.1 CamemBERT on AIcrowd
 
 There is not enough data to effectively train this model in the aicrowd competition. However, after multiple attempts, we noticed that the results were better when we had a smaller batch size, and no text processing at all.
 
+
 ### 5.2 Cognates + Features Extraction + Pycaret
 
-All sentences have been translated into English using the Google Translate API. Then, multiple algorithms of distance calculation between the difference of string were applied to the whole sentences. These elements were then added to the data used in the Pycaret model, and we notice an increase in accuracy. The cognates are, therefore, helpful. However, based on the results of aicrowd, we are still far from the performance of CamemBERT.
+All sentences have been translated into English using the Google Translate API. Then, multiple algorithms of distance calculation between the difference of strings were applied to the whole sentences. These elements were then added to the data used in the Pycaret model, and we notice an increase in accuracy. The cognates are, therefore, helpful. However, based on the results of aicrowd, we are still far from the performance of CamemBERT.
 
 ```Python
 Model                           Accuracy   AUC      Recall    Prec.     TT(Sec)
@@ -175,13 +191,16 @@ Light Gradient Boosting Machine 0.5276     0.8279   0.5290    0.5294    1.596
 Decision Tree Classifier        0.4781     0.6879   0.4779    0.4774    0.138
 ```
 
+
 ### 5.3 Lingorank Web App
 
 The UI has been improved and now displays the perceived difficulty of each word by the model. The difficulty levels of words are usually low and far from the predicted difficulty of the sentence because this process does not take into account the relationship between the words.
 
+
 ### 5.4 Next steps
 
 The next steps are to train a few different versions of the models to send to AIcrowd to see potential improvements in our score, improve the UI by adding a tab to visualize the intensity of cognates within a sentence, adjust the project according to the evaluation criteria and prepare the final presentation.
+
 
 ## 6. Last Milestone : Conclusion of the project & General administrative information
 
@@ -199,6 +218,7 @@ You can find in the figure below the general architecture of this project.
 
 _Nota Bene: This chapter aims to summarize in a few paragraphs what has been explained until now. It's normal if there is recurring information.
 
+
 #### Backend
 
 1) It all starts with a dataset. In it, two columns: one with sentences in French and the other with a label that goes from A1 to C2 to represent the difficulty of each of those sentences. All of that is in csv format. This dataset will have to be used with the notebook found in ```/notebook/BSA2021_Google_LingoRank_with_CamemBERT.ipynb```. 
@@ -214,13 +234,28 @@ _Nota bene: the model weights more than 400Mo, and therefore can't be uploaded o
 
 5) On Azure, thanks to the student offer, we have the necessary credits to create a container instance. To do so, we take the link of our container on Docker Hub and we reserve a 4 GB container instance for it on Azure. They then take care of downloading our Docker container and starting it. Afterwards, they give us an IP address to which we can make API calls.
 
+
 #### Frontend
 
 1) For the frontend, we use the open-source library 'streamlit', which allows to easily create data science web applications. A simple, yet efficient layout can be built in a few lines to allow users to enter French sentences. Those sentences are then sent to the API, which will return the result their difficulty and show it on the screen for the users. Additionnally, right after that, another API call is sent to retrieve the difficulty of each word, which will be display according to a color code on the web page.
 
 2) Once the web interface is developed, we decided to use Heroku (a PaaS) to host the frontend for free thanks to their Free-tier service. In a few commands in the terminal which are also listed in ```DOCUMENTATION.md```, the ```/frontend``` folder as well as all the necessary dependencies are installed and then deployed in a Heroku style container (in the same way as Docker) and are put online at the address: https://lingorank-frontend.herokuapp.com/
 
+
 ### 6.3 Model and Model Evaluation overal summary
+
+#### Predictive model description
+
+We use the power of Deep Learning and especially Transfer Learning. This means that we take a model that has been trained on a huge data set and fine-tune it to a specific task. So we chose CamemBERT, an iteration of the BERT (Bidirectional Encoder Representations from Transformers) architecture, which is a model made by researchers at Google. CamemBERT was presented in the paper _CamemBERT: a Tasty French Language Model by Louis Martin, Benjamin Muller, Pedro Javier Ortiz Suárez, Yoann Dupont, Laurent Romary, Éric Villemonte de la Clergerie, Djamé Seddah, and Benoît Sagot_. This model was trained on 138GB of French text.
+With the help of a blog post by Olivier (2021) and the Huggingface Transformers library, we have adapted this model and added a classification layer with 6 outputs at the end of it. Thus, it becomes possible to train it to classify French sentences difficulty levels from A1 to C2.
+
+
+#### A word about combining multiple models
+
+In our approach with Pycaret, we combined several models. We used two methods: ensembling (boosting and bragging) and stacking (use several different algorithms and we average the each of their output). It was possible to do boosting and bragging very easily with this open source PYcaret library: https://www.upgrad.com/blog/bagging-vs-boosting/#:~:text=Bagging%20and%20Boosting%3A%20Differences&text=Bagging%20is%20a%20method%20of,Boosting%20decreases%20bias%2C%20not%20variance. 
+However, the results were not fundamentally superior. The predictions took longer to perform without being really more accurate.
+For the stacking, we used several models. That is, we took the top 3 machine learning algorithms with the best results on our dataset and then averaged their three predictions to assign the label. This technique was not that notably successful either successful.
+So, in essence, combining models lead to improvements, but they were far from major.
 
 
 
