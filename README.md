@@ -192,10 +192,36 @@ You can find in the figure below the general architecture of this project.
 - For the frontend, the web app is developed with the Streamlit library and hosted on heroku. 
 - Backend and Frontend are then hosted on an Azure cloud container to be available online.
 
-# Insert Figure
+# **Insert Figure**
 
 
-### 6.2 
+### 6.2 Instructions from A to Z on how to train, deploy and use the model
+
+_Nota Bene: This chapter aims to summarize in a few paragraphs what has been explained until now. It's normal if there is recurring information.
+
+#### Backend
+
+1) It all starts with a dataset. In it, two columns: one with sentences in French and the other with a label that goes from A1 to C2 to represent the difficulty of each of those sentences. All of that is in csv format. This dataset will have to be used with the notebook found in ```/notebook/BSA2021_Google_LingoRank_with_CamemBERT.ipynb```. 
+In this notebook, you only need to connect to your google drive, import the data in csv format, specify the amount of _epochs_ the model should train and then wait for the end of the training. After that, it will be automaticaly stored in your Google drive if its performance improved during the training compared to the previous ones. The notebook will automatically tokenize the sentences in a format accepted by the CamemBERT architecture that we use. The estimated time to train the model is of around 5-6 hours.
+
+2) Afterwards, some very precise commands in the terminal will have to be performed to setup for future operations. All these commands are documented very clearly in the file at the root of the project named ```DOCUMENTATION.md```.
+
+3) The next step is to take this trained model (here named ```lingorank.pt```) and create an API for it. This is a normal Flask API that loads the model and then uses it to predict the difficulty on two endpoints: either for a complete sentence (as originally intended), or either for each of its words (as required for this project).
+
+_Nota bene: the model weights more than 400Mo, and therefore can't be uploaded on GitHub. The trained model we use can be downloaded at this link: https://drive.switch.ch/index.php/s/6njoQoM0R3ML5kf and must be placed in the ```/API``` folder._
+
+4) After that, we have to dockerize the API to host it on Azure and have a deployed, accessible endpoint. So, we created a dockerfile that has two roles: to install the necessary dependencies for the API, to expose the port 80 (which is the default port for Azure to make requests). Once this is done, we just have to build the container with the commands that can be found in the documentation (the ```DOCUMENTATION.md``` file). After that, to make it easier to handle, we upload the container on Docker Hub in order to retrieve it easily on Azure.
+
+5) On Azure, thanks to the student offer, we have the necessary credits to create a container instance. To do so, we take the link of our container on Docker Hub and we reserve a 4 GB container instance for it on Azure. They then take care of downloading our Docker container and starting it. Afterwards, they give us an IP address to which we can make API calls.
+
+#### Frontend
+
+1) For the frontend, we use the open-source library 'streamlit', which allows to easily create data science web applications. A simple, yet efficient layout can be built in a few lines to allow users to enter French sentences. Those sentences are then sent to the API, which will return the result their difficulty and show it on the screen for the users. Additionnally, right after that, another API call is sent to retrieve the difficulty of each word, which will be display according to a color code on the web page.
+
+2) Once the web interface is developed, we decided to use Heroku (a PaaS) to host the frontend for free thanks to their Free-tier service. In a few commands in the terminal which are also listed in ```DOCUMENTATION.md```, the ```/frontend``` folder as well as all the necessary dependencies are installed and then deployed in a Heroku style container (in the same way as Docker) and are put online at the address: https://lingorank-frontend.herokuapp.com/
+
+### 6.3 Model and Model Evaluation overal summary
+
 
 
 ## 7. Bibliography
