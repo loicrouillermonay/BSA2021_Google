@@ -241,25 +241,25 @@ _Nota bene: the model weights more than 400Mo, and therefore can't be uploaded o
 
 #### Frontend
 
-1) For the frontend, we use the open-source library 'streamlit', which allows to easily create data science web applications. A simple, yet efficient layout can be built in a few lines to allow users to enter French sentences. Those sentences are then sent to the API, which will return the result their difficulty and show it on the screen for the users. Additionnally, right after that, another API call is sent to retrieve the difficulty of each word, which will be display according to a color code on the web page.
+1) For the frontend, we use the open-source library 'streamlit', which allows us to create data science web applications easily. A simple yet efficient layout can be built in a few lines to allow users to enter French sentences. Those sentences are then sent to the API, which will return their difficulty and show it on the screen for the users. Additionally, right after that, another API call is sent to retrieve the difficulty of each word, which will be displayed according to a color code on the web page.
 
-2) Once the web interface is developed, we decided to use Heroku (a PaaS) to host the frontend for free thanks to their Free-tier service. In a few commands in the terminal which are also listed in ```DOCUMENTATION.md```, the ```/frontend``` folder as well as all the necessary dependencies are installed and then deployed in a Heroku style container (in the same way as Docker) and are put online at the address: https://lingorank-frontend.herokuapp.com/
+2) Once we developed the web interface, we decided to use Heroku (a PaaS) to host the frontend for free, thanks to their Free-tier service. In a few commands in the terminal, which are also listed in ```DOCUMENTATION.md```, the ```/frontend``` folder as well as all the necessary dependencies are installed and then deployed in a Heroku style container (in the same way as Docker) and are put online at the address: https://lingorank-frontend.herokuapp.com/
 
 
 ### 6.3 Model and Model Evaluation overal summary
 
 #### Predictive model description
 
-We use the power of Deep Learning and especially Transfer Learning. This means that we take a model that has been trained on a huge data set and fine-tune it to a specific task. So we chose CamemBERT, an iteration of the BERT (Bidirectional Encoder Representations from Transformers) architecture, which is a model made by researchers at Google. CamemBERT was presented in the paper _CamemBERT: a Tasty French Language Model by Louis Martin, Benjamin Muller, Pedro Javier Ortiz Suárez, Yoann Dupont, Laurent Romary, Éric Villemonte de la Clergerie, Djamé Seddah, and Benoît Sagot_. This model was trained on 138GB of French text.
-With the help of a blog post by Olivier (2021) and the Huggingface Transformers library, we have adapted this model and added a classification layer with 6 outputs at the end of it. Thus, it becomes possible to train it to classify French sentences difficulty levels from A1 to C2.
+We use the power of Deep Learning and especially Transfer Learning. This means that we take a model that has been trained on a vast data set and fine-tune it to a specific task. So we chose CamemBERT, an iteration of the BERT (Bidirectional Encoder Representations from Transformers) architecture, a model made by researchers at Google. CamemBERT was presented in the paper _CamemBERT: a Tasty French Language Model by Louis Martin, Benjamin Muller, Pedro Javier Ortiz Suárez, Yoann Dupont, Laurent Romary, Éric Villemonte de la Clergerie, Djamé Seddah, and Benoît Sagot_. This model was trained on 138GB of French text.
+With the help of a blog post by Olivier (2021) and the Huggingface Transformers library, we have adapted this model and added a classification layer with six outputs at the end of it. Thus, it becomes possible to train it to classify French sentences difficulty levels from A1 to C2.
 
 
 #### A word about combining multiple models
 
-In our approach with Pycaret, we combined several models. We used two methods: ensembling (boosting and bragging) and stacking (use several different algorithms and we average the each of their output). It was possible to do all of this quite easily with the open source library Pycaret. 
-However, the results were not fundamentally superior. The predictions took longer to perform without being really more accurate.
-For the stacking, we used several models. That is, we took the top 3 machine learning algorithms found with Pycaret with the best results on our dataset and then averaged their three predictions to assign the label. This technique was not that notably successful either successful.
-So, in essence, combining models lead to improvements, but they were far from major.
+In our approach with Pycaret, we combined several models. We used two methods: ensembling (boosting and bragging) and stacking (use several different algorithms and average each of their output). It was possible to do all of this quite easily with the open-source library Pycaret. 
+However, the results were not fundamentally superior. The predictions took longer to perform without being truly more accurate.
+For the stacking, we used several models. That is, we took the top 3 machine learning algorithms found with Pycaret with the best results on our dataset and then averaged their three predictions to assign the label. Unfortunately, this technique was not that notably successful nor successful.
+So, in essence, combining models led to improvements, but they were far from significant.
 
 
 
