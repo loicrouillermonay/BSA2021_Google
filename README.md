@@ -49,17 +49,17 @@ The purpose of this milestone is to improve the models and make submissions to t
 
 ## 2. Approach to solve the problem
 
-To solve the problem of creating a predictive model, we will use a method inspired from the papers we have read and learned in the research findings mentioned at the end of the readme. The method is described in the following paragraphs.
+To solve the problem of creating a predictive model, we will use a method inspired by the papers we have read and learned in the research findings mentioned at the end of the readme. The method is described in the following paragraphs.
 
 First of all, we collected data from reading comprehension tests from samples of exams made available by the "Fondation Esprit Francophonie DELF DALF Suisse". Those texts are already labeled according to their difficulty level. This allowed us to collect a whole set of more than 1000 sentences sorted by experts from A1 level to C2. Therefore, the quality and the accuracy of the training data is guaranteed.
 
 Following this, we will create an NLP Pipeline to transform the sentences into the most efficient features possible to train a machine learning model. To boost accuracy, we will have to extract additional features such as measuring the number of frequencies of words from 1-4 syllables per sentence, calculate the diversity of vocabulary per sentence with specific formulas or external python libraries such as "wordstats", count the length of each sentence and use various lexical treatments common to NLP such as lemmatization. More on this subject can be found highlighted in yellow in the "research findings" Microsoft Word file in the "documents" folder of this repository.
 
-Thus, it has been decided that we will treat this assignment as a classification problem and we will take into consideration each sentence as a whole for the difficulty classification. However, we have the intuition that it would be possible to treat it as a regression problem; with a difficulty that could range from 1 to 6, such as from A1 to C2, it would be possible to create a model that can then evaluate a slight difference in level between two texts of the same level as long as a result is higher. For example, two texts with a model that predicts difficulties of 5.16 and 5.38 will be texts judged as C1, but the second would be slightly higher and could offer a more precise system of recommendations to people. However, we will not choose this method. Or, at least, not at this time in the project.
+Thus, it has been decided that we will treat this assignment as a classification problem, and we will consider each sentence as a whole for the difficulty classification. However, we have the intuition that it would be possible to treat it as a regression problem; with a difficulty that could range from 1 to 6, such as from A1 to C2, it would be possible to create a model that can then evaluate a slight difference in level between two texts of the same level as long as a result is higher. For example, two texts with a model that predicts difficulties of 5.16 and 5.38 will be texts judged as C1, but the second would be slightly higher and could offer a more precise system of recommendations to people. However, we will not choose this method. Or, at least, not at this time in the project.
 
-Regarding the creation of the model, we will use the resources made available on the Google Cloud. We will first upload the data to the Google Cloud Platform and try to work with Google AutoML; then, if we feel that we are not satisfied with the solution, it would be possible to do things a more manually by creating an instance of AI Platform Notebooks (JupyterLab). It is a virtual machine instance that comes preinstalled with the latest machine learning and data science libraries. If that is the case, we will evaluate algorithms that performed well in the papers we read, such as those highlighted in blue in the research findings Microsoft Word file in the "documents" folder of this repository. Some of those are Logistic Regression, AdaBoost, LDA, SVM, kNN, and Neural Networks.
+Regarding the creation of the model, we will use the resources made available on the Google Cloud. We will first upload the data to the Google Cloud Platform and try to work with Google AutoML; then, if we feel that we are not satisfied with the solution, it would be possible to do things more manually by creating an instance of AI Platform Notebooks (JupyterLab). It is a virtual machine instance that comes preinstalled with the latest machine learning and data science libraries. If that is the case, we will evaluate algorithms that performed well in the papers we read, such as those highlighted in blue in the research findings Microsoft Word file in the "documents" folder of this repository. Some of those are Logistic Regression, AdaBoost, LDA, SVM, kNN, and Neural Networks.
 
-Then we will have to optimize the model, save the best performing model and deploy it. Those stages will be described in greater detail later in the course of the project.
+Then we will have to optimize the model, save the best performing model and deploy it. Those stages will be described in greater detail below in the course of the project.
 
 
 ## 3. Contribution
@@ -69,14 +69,16 @@ Team Google annotated 1020 sentences for Milestone 1.
 
 ## 4. Synthesis of the work done on Milestone 2
 
-A lot of work was performed for milestone two, so this chapter will summarize it as concisely as possible. Firstly, it will describe our strategy regarding the training data. Secondly, it will then explain the simultaneous creation of three types of models: Google Cloud Platform, Features extraction + Pycaret & BOW and CamemBERT. Lastly, it will cover how the model was deployed as an API with a user friendly UI frontend.
-
+A lot of work was performed for milestone two, so this chapter will summarize it as concisely as possible. 
+Firstly, it will describe our strategy regarding the training data. 
+Secondly, it will then explain the simultaneous creation of three types of models: Google Cloud Platform, Features extraction + Pycaret & BOW and CamemBERT. 
+Lastly, it will cover how the model was deployed as an API with a user-friendly UI frontend.
 
 ### 4.1 A quick word on the data
 
-To make it simpler for us, what is described in the following chapter has been first tested and implemented on our own dataset. However, the amount of data proved too insufficient to conduct significant operations. In the end, this method mainly allowed us to find which model underfitted the least.
+To make it simpler for us, what is described in the following chapter has been first tested and implemented on our dataset. However, the amount of data proved too insufficient to conduct significant operations. In the end, this method mainly allowed us to find which model underfitted the least.
 
-That is why we switched strategy afterwards and used 9174 observations. They are the result of a merge of our colleagues' data that we found was the most qualitative mixed with ours. This allowed us to "get down to business" and work on models that were not constantly underfitting. This way, we could make a better educated guess about which model was to be chosen for the final milestone of this project, where everyone will have the same dataset to train.
+That is why we switched strategy afterwards and used 9174 observations. They result from a merge of our colleagues' data that we found was the most qualitative mixed with ours. This allowed us to "get down to business" and work on models that were not constantly underfitting. This way, we could make a better educated guess about which model was to be chosen for the final milestone of this project, where everyone will have the same dataset to train.
 
 
 ### 4.2 Predictive models
