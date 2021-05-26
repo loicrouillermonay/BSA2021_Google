@@ -70,6 +70,7 @@ Team Google annotated 1020 sentences for Milestone 1.
 ## 4. Synthesis of the work done on Milestone 2
 
 A lot of work was performed for milestone two, so this chapter will summarize it as concisely as possible. 
+
 Firstly, it will describe our strategy regarding the training data. 
 Secondly, it will then explain the simultaneous creation of three types of models: Google Cloud Platform, Features extraction + Pycaret & BOW and CamemBERT. 
 Lastly, it will cover how the model was deployed as an API with a user-friendly UI frontend.
@@ -93,18 +94,18 @@ _NOTA BENE: All the notebooks for each of the models as well as the one for data
 
 #### A. Google Cloud Platform - Natural Language
 
-This is the simplest solution. All data composed of a text column and a column with the labels were uploaded to Google Storage. It was then transmitted to the "Natural Language" application. There, Google creates a model on its own via its text classification wizard. The training lasts one day and the model's accuracy is 61.39%.
+This is the simplest solution. First, all data composed of a text column and a column with the labels were uploaded to Google Storage. It was then transmitted to the "Natural Language" application. There, Google creates a model on its own via its text classification wizard. The training lasts one day, and the model's accuracy is 61.39%.
 
-From the Google Cloud Platform, there is the possibility to deploy the model and make API calls in one click. There was no fine-tuning possible and this model was kept as a backup if no other predictive models could be created. It also served as a kind of "benchmark" to judge of the findings with the other models.
+There is the possibility of deploying the model from the Google Cloud Platform and making API calls in one click. There was no fine-tuning possible, and this model was kept as a backup if no other predictive models could be created. It also served as a kind of "benchmark" to judge the findings with the other models.
 
 
 #### B. Features Extraction + Pycaret / & Bag-Of-Words
 
-Here, we applied the methods explained in our preliminary search. Various features were extracted about the texts such as sentence length, the number of stopwords per sentence, Part-Of-Speech statistics, and Entity Recognition. They were all put in a DataFrame of text metadata.
+Here, we applied the methods explained in our preliminary search. Various features were extracted about the texts, such as sentence length, the number of stopwords per sentence, Part-Of-Speech statistics, and Entity Recognition. They were all put in a DataFrame of text metadata.
 
-Based on that, we used the PyCaret library to classify the labels. It is an open-source, low-code machine learning library in Python. It allows, among many other things, to easily compare different alorithms and perform more advanced preprocessing on the data. The library also offers an easy way to save predictive models and later deploy them.
+Based on that, we used the PyCaret library to classify the labels. It is an open-source, low-code machine learning library in Python. It allows, among many other things, to easily compare different algorithms and perform more advanced preprocessing on the data. The library also offers an easy way to save predictive models and later deploy them.
 
-As a result of using the metadata, the best result was obtained from the random forest classifier with an accuracy of 53%. We were positively surprised, altough dissatisfied by the confusion matrix. Indeed, the proportion of deviation and extremes on the wrong predictions is too significant. We have the intuition that the method is not good enough and shouldn't be further refined.
+As a result of using the metadata, the best result was obtained from the random forest classifier with an accuracy of 53%. We were positively surprised, although dissatisfied by the confusion matrix. Indeed, the proportion of deviation and extremes on the wrong predictions is too significant. Thus, we have the intuition that the method is not good enough and shouldn't be further refined.
 
 ```Python
 Model                           Accuracy   AUC      Recall    Prec.     TT(Sec)
@@ -120,11 +121,11 @@ The use of the Bag-Of-Words technique was tried for a week but proved impractica
 
 #### C. CamemBERT For Sequence Classification
 
-The CamemBERT model was proposed in the paper "CamemBERT: a Tasty French Language Model" by Louis Martin, Benjamin Muller, Pedro Javier Ortiz Suárez, Yoann Dupont, Laurent Romary, Éric Villemonte de la Clergerie, Djamé Seddah, and Benoît Sagot (2020). It was created based on Facebook’s RoBERTa model, released in 2019. (Huggingface, 2021). It is a model trained on 138GB of French text. For our project, we more specifically used "CamemBERTForSequenceClassification": it is the CamemBERT Model transformer with a sequence classification/regression head on top. Our thought process is the following: with our knowledge in deep learning, why not take a model that is already pretrained with French to make a classification ? We could do it thanks to a very clear tutorial from a person named Oliver. He has not left any more information on himself aside from his name and his tutorial: “Analyse de sentiments avec CamemBERT,” 2021.
+The CamemBERT model was proposed in the paper "CamemBERT: a Tasty French Language Model" by Louis Martin, Benjamin Muller, Pedro Javier Ortiz Suárez, Yoann Dupont, Laurent Romary, Éric Villemonte de la Clergerie, Djamé Seddah, and Benoît Sagot (2020). It was created based on Facebook's RoBERTa model, released in 2019. (Huggingface, 2021). It is a model trained on 138GB of French text. We more specifically used "CamemBERTForSequenceClassification" for our project: it is the CamemBERT Model transformer with a sequence classification/regression head on top. Our thought process is the following: with our knowledge in deep learning, why not take a model that is already pretrained with French to make a classification? We could do it thanks to a comprehensive tutorial from a person named Oliver. He has not left any more information on himself aside from his name and tutorial: "Analyse de sentiments avec CamemBERT," 2021.
 
-To use CamemBERT, labels were transformed into numbers. A1 to C2 became 0 to 5. Then, we performed text preprocessing via CamembertTokenizer to transform the data into tensors. As a result, we were able to train the model via a GPU instance for about 20 epochs, about 5 hours. At each interval, if the loss function improves, the model is saved. This way, it is possible to make separate and multiple training sessions by reloading a model. When a prediction is made, the text has to be tokenized and then transposed again, this time from "0 to 5" to "A1 to C2".
+To use CamemBERT, we transformed labels into numbers. In our case, A1 to C2 became 0 to 5. Then, we performed text preprocessing via CamembertTokenizer to transform the data into tensors. As a result, we trained the model via a GPU instance for about 20 epochs, about 5 hours. At each interval, if the loss function improves, the model is saved. This way, it is possible to make separate and multiple training sessions by reloading a model. When a prediction is made, the text has to be tokenized and then transposed again, this time from "0 to 5" to "A1 to C2".
 
-The results of this model are excellent: _98% accuracy_ !! We insist on the fact that we double checked that the predictions were made on the 10% of the dataset that the model had never seen. In the confusion matrix, we also observe that when there is an error, it is because the model predicted that the sentence was from an immediately adjacent level. Furthermore, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
+The results of this model are excellent: _98% accuracy_ !! We insist that we double-checked that the predictions were made on the 10% of the dataset that the model had never seen. In the confusion matrix, we also observe that when there is an error, the model predicted that the sentence was from an immediately adjacent level. Furthermore, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
 
 CamemBERT - Classification Report
 
@@ -159,30 +160,30 @@ This model is the one we deployed and the one we will do the final training with
 
 ### 4.3 Deployment
 
-For the deployment of the model, a simple Flask API was created. In effect, it loads the model and predicts a sentence when receiving a request. The API was Dockerized and published on Docker Hub. We imported this Docker Container regrouping the Flask API with the model on an Azure Container created for this purpose. The API is located at the public address http://51.103.156.182/. Predictions can be made through a request with the "text" query param as KEY and the sentence as VALUE on the address: http://51.103.156.182/api/predict. Be careful, the container does not run constantly to avoid superfluous costs and the public address may be updated/changed in the future. If this is the case and there is a need to test it, you should write us an email, we will quickly respond to any of your enquiries.
+For the deployment of the model, we created a simple Flask API. In effect, it loads the model and predicts a sentence when receiving a request. The API was Dockerized and published on Docker Hub. We imported this Docker Container regrouping the Flask API with the model on an Azure Container created for this purpose. The API is located at the public address http://51.103.156.182/. Predictions can be made through a request with the "text" query param as KEY and the sentence as VALUE on the address: http://51.103.156.182/api/predict. Be careful, the container does not run constantly to avoid high costs, and the public address may be updated/changed in the future. If this is the case and there is a need to test it, you should write us an email, and we will quickly respond to any of your enquiries.
 
 _NOTA BENE: The API and documentation (ReadMe) on how to use it can be found in the "api" folder of this GitHub repository._
 
-The team did not stop there: we also released a frontend with UI called "Lingorank UI". It can be found in the folder of the same name in the GitHub repository. It was created with the Python library "Streamlit", making it easy to code an MVP, and the application is hosted on Heroku. From this interface, it is possible to write either sole sentences or whole texts in a "text input area". Through that, a request is sent to the API to have an answer in a very user-friendly and interactive way.
+The team did not stop there: we also released a frontend with UI called "Lingorank UI". It can be found in the folder of the same name in the GitHub repository. It was created with the Python library "Streamlit", making it easy to code an MVP, and the application is hosted on Heroku. It is possible to write either sole sentences or whole texts in a "text input area" from this interface. Through that, a request is sent to the API to have an answer in a very user-friendly and interactive way.
 
 https://lingorank-frontend.herokuapp.com/
 
-A big lesson learned during this phase was that we could not make our docker container run on any clouds. This was due to the usage of the new macOS with Apple M1 chips. The Docker container architecture was in arm64, and it was not supported on Azure, and Google Cloud Run instances. It sounds simple, but it took a long time to understand because the error and message logs did not targeted this problem effectively. A different PC was then used to create a docker container and get around this problem.
+A big lesson learned during this phase was that we could not make our docker container run on any clouds. This was due to the usage of the new macOS with Apple M1 chips. The Docker container architecture was in arm64, and Azure and Google Cloud Run instances did not support it. It sounds simple, but it took a long time to understand because the error and message logs did not target this problem effectively. A different PC was then used to create a docker container and get around this problem.
 
 
 ## 5. Synthesis of the work done on Milestone 3
 
-A folder named aicrowd has been created where all the models have been adapted for the competition. There, the results of the submissions are gathered, as well as the notebooks used to prepare the data and train the models.
+We created a folder named aicrowd, where we adapted all the models for the competition. There, the results of the submissions are gathered, as well as the notebooks used to prepare the data and train the models.
 
 
 ### 5.1 CamemBERT on AIcrowd
 
-There is not enough data to effectively train this model in the aicrowd competition. However, after multiple attempts, we noticed that the results were better when we had a smaller batch size, and no text processing at all.
+There is not enough data to effectively train this model in the aicrowd competition. However, after multiple attempts, we noticed that the results were better when we had a smaller batch size and no text processing at all.
 
 
 ### 5.2 Cognates + Features Extraction + Pycaret
 
-All sentences have been translated into English using the Google Translate API. Then, multiple algorithms of distance calculation between the difference of strings were applied to the whole sentences. These elements were then added to the data used in the Pycaret model, and we notice an increase in accuracy. The cognates are, therefore, helpful. However, based on the results of aicrowd, we are still far from the performance of CamemBERT.
+All sentences have been translated into English using the Google Translate API. Then, we applied multiple algorithms of distance calculation between the difference of strings to the whole sentences. These elements were then added to the data used in the Pycaret model, and we noticed an increase in accuracy. The cognates are, therefore, helpful. However, based on the results of aicrowd, we are still far from the performance of CamemBERT.
 
 ```Python
 Model                           Accuracy   AUC      Recall    Prec.     TT(Sec)
@@ -196,12 +197,12 @@ Decision Tree Classifier        0.4781     0.6879   0.4779    0.4774    0.138
 
 ### 5.3 Lingorank Web App
 
-The UI has been improved and now displays the perceived difficulty of each word by the model. The difficulty levels of words are usually low and far from the predicted difficulty of the sentence because this process does not take into account the relationship between the words.
+The UI has been improved and now displays the perceived difficulty of each word by the model. The difficulty levels of words are usually low and far from the predicted difficulty of the sentence because this process does not consider the relationship between the words.
 
 
 ### 5.4 Next steps
 
-The next steps are to train a few different versions of the models to send to AIcrowd to see potential improvements in our score, improve the UI by adding a tab to visualize the intensity of cognates within a sentence, adjust the project according to the evaluation criteria and prepare the final presentation.
+The following steps are to train a few different versions of the models to send to AIcrowd to see potential improvements in our score, improve the UI by adding a tab to visualize the intensity of cognates within a sentence, adjust the project according to the evaluation criteria and prepare the final presentation.
 
 
 ## 6. Last Milestone : Conclusion of the project & General administrative information
@@ -219,7 +220,7 @@ You can find the general architecture of this project in the figure below.
 
 ### 6.2 Instructions from A to Z on how to train, deploy and use the model
 
-_Nota Bene: This chapter aims to summarize in a few paragraphs what has been explained until now. It's normal if there is recurring information.
+_Nota Bene: This chapter aims to summarize in a few paragraphs what has been explained until now. It's normal if there is recurring information._
 
 
 #### Backend
