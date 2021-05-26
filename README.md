@@ -252,9 +252,9 @@ With the help of a blog post by Olivier (2021) and the Huggingface Transformers 
 
 #### A word about combining multiple models
 
-In our approach with Pycaret, we combined several models. We used two methods: ensembling (boosting and bragging) and stacking (use several different algorithms and we average the each of their output). It was possible to do boosting and bragging very easily with this open source PYcaret library: https://www.upgrad.com/blog/bagging-vs-boosting/#:~:text=Bagging%20and%20Boosting%3A%20Differences&text=Bagging%20is%20a%20method%20of,Boosting%20decreases%20bias%2C%20not%20variance. 
+In our approach with Pycaret, we combined several models. We used two methods: ensembling (boosting and bragging) and stacking (use several different algorithms and we average the each of their output). It was possible to do all of this quite easily with the open source library Pycaret. 
 However, the results were not fundamentally superior. The predictions took longer to perform without being really more accurate.
-For the stacking, we used several models. That is, we took the top 3 machine learning algorithms with the best results on our dataset and then averaged their three predictions to assign the label. This technique was not that notably successful either successful.
+For the stacking, we used several models. That is, we took the top 3 machine learning algorithms found with Pycaret with the best results on our dataset and then averaged their three predictions to assign the label. This technique was not that notably successful either successful.
 So, in essence, combining models lead to improvements, but they were far from major.
 
 
