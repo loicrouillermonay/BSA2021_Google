@@ -116,7 +116,7 @@ K Neighbors Classifier          0.3935     0.7193   0.3988    0.3894    1.712
 Logistic Regression             0.3667     0.7470   0.3760    0.3613    2.044
 ```
 
-The use of the Bag-Of-Words technique was tried for a week but proved impractical due to the explosion of the observation space and the difficulty of training a model, even using PCA. We decided to use only the features extracted from the text.
+The use of the Bag-Of-Words technique was tried for a week but proved impractical due to the explosion of the features space and the difficulty of training a model, even using PCA. We decided to use only the features extracted from the text.
 
 
 #### C. CamemBERT For Sequence Classification
