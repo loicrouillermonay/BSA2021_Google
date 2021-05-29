@@ -1,54 +1,80 @@
-**Home**
-----
-  Returns "BSA2021 - Team Google's API is working!" if the API is working.
+## **Home**
 
-* **URL**
+Returns "BSA2021 - Team Google's API is working!" if the API is working.
+
+- **URL**
 
   /
 
-* **Method:**
+- **Method:**
 
   `GET`
 
-* **URL Params**
+- **URL Params**
 
   None
 
-* **Data Params**
+- **Data Params**
 
   None
 
-* **Success Response:**
+- **Success Response:**
 
-  * **Code:** 200 <br />
+  - **Code:** 200 <br />
     **Content:** `BSA2021 - Team Google's API is working!`
 
+## **Sentence prediction**
 
+Returns the predicted difficulty of the text input and the original text input.
 
-**Prediction**
-----
-  Returns the overall text input prediction and the text input.
-
-* **URL**
+- **URL**
 
   /api/predict
 
-* **Method:**
+- **Method:**
 
   `GET`
 
-* **URL Params**
+- **URL Params**
 
   **Required:**
- 
-   `text=[string]`
 
-* **Data Params**
+  `text=[string]`
+
+- **Data Params**
 
   None
 
-* **Success Response:**
+- **Success Response:**
 
-  * **Code:** 200 <br />
-    **Content:** `{"difficulty":"CEFR_LEVEL","text":"INPUT"}` 
+  - **Code:** 200 <br />
+    **Content:** `{"difficulty":"CEFR_LEVEL","text":"INPUT"}`
+    with _CEFR_LEVEL_ the level of difficulty according to the (Council of Europe)[https://www.coe.int/en/web/common-european-framework-reference-languages/table-1-cefr-3.3-common-reference-levels-global-scale]
+
+## **Words prediction**
+
+Returns the predicted difficulty of all words of a text input and the original text input.
+
+- **URL**
+
+  /api/predict/words
+
+- **Method:**
+
+  `GET`
+
+- **URL Params**
+
+  **Required:**
+
+  `text=[string]`
+
+- **Data Params**
+
+  None
+
+- **Success Response:**
+
+  - **Code:** 200 <br />
+    **Content:** `{"difficulty":"[CEFR_LEVELS]","text":"INPUT"}`
     with _CEFR_LEVEL_ the level of difficulty according to the (Council of Europe)[https://www.coe.int/en/web/common-european-framework-reference-languages/table-1-cefr-3.3-common-reference-levels-global-scale]
