@@ -125,7 +125,7 @@ The CamemBERT model was proposed in the paper "CamemBERT: a Tasty French Languag
 
 To use CamemBERT, we transformed labels into numbers. In our case, A1 to C2 became 0 to 5. Then, we performed text preprocessing via CamembertTokenizer to transform the data into tensors. As a result, we trained the model via a GPU instance for about 20 epochs, about 5 hours. At each interval, if the loss function improves, the model is saved. This way, it is possible to make separate and multiple training sessions by reloading a model. When a prediction is made, the text has to be tokenized and then transposed again, this time from "0 to 5" to "A1 to C2".
 
-The results of this model are excellent: _98% accuracy_ !! We insist that we double-checked that the predictions were made on the 10% of the dataset that the model had never seen. In the confusion matrix, we also observe that when there is an error, the model predicted that the sentence was from an immediately adjacent level. Furthermore, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
+The results of this model are excellent: _98% accuracy_. We insist that we double-checked that the predictions were made on the 10% of the dataset that the model had never seen. In the confusion matrix, we also observe that when there is an error, the model predicted that the sentence was from an immediately adjacent level. Furthermore, when we check the incorrectly annotated sentences manually, we realize that perhaps the error comes from the quality of the annotation rather than the model.
 
 CamemBERT - Classification Report
 
@@ -147,16 +147,43 @@ CamemBERT - Classification Report
 CamemBERT - Confusion Matrix
 
 ```python
-    [141,   6,   1,   0,   0,   0],
-    [  1, 168,   1,   0,   0,   0],
-    [  0,   4, 148,   2,   0,   0],
-    [  0,   0,   1, 155,   0,   0],
-    [  0,   0,   1,   0, 157,   2],
-    [  0,   0,   0,   0,   3, 129]
+       [141,   6,   1,   0,   0,   0],
+       [  1, 168,   1,   0,   0,   0],
+       [  0,   4, 148,   2,   0,   0],
+       [  0,   0,   1, 155,   0,   0],
+       [  0,   0,   1,   0, 157,   2],
+       [  0,   0,   0,   0,   3, 129]
 ```
 
 This model is the one we deployed and the one we will do the final training with.
 
+After doing a triple-check in order to find an explanation about those excellent results, we came to a conclusion that there might be a shuffling in the data sets because we did not set a random_state when using the function `train_test_split()` of the scikit-learn library. After doing that, we trained again a model from scratch for 30 epochs (~5 hours) and achieved the results below:
+
+
+```python
+                  precision    recall  f1-score   support
+
+               0       0.84      0.82      0.83       146
+               1       0.76      0.71      0.74       192
+               2       0.70      0.73      0.71       146
+               3       0.79      0.64      0.71       193
+               4       0.68      0.76      0.72       144
+               5       0.67      0.89      0.77        99
+
+        accuracy                           0.74       920
+       macro avg       0.74      0.76      0.74       920
+    weighted avg       0.75      0.74      0.74       920
+```
+CamemBERT (v2.0) - Confusion Matrix
+
+```python
+       [119,  19,   4,   3,   1,   0],
+       [ 23, 136,  23,   5,   2,   3],
+       [  0,  19, 106,  12,   5,   4],
+       [  0,   3,  18, 124,  33,  15],
+       [  0,   1,   1,  12, 109,  21],
+       [  0,   0,   0,   1,  10,  88]
+```
 
 ### 4.3 Deployment
 
