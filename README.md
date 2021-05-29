@@ -185,6 +185,8 @@ CamemBERT (v2.0) - Confusion Matrix
        [  0,   0,   0,   1,  10,  88]
 ```
 
+The results seem to remain pretty good.
+
 ### 4.3 Deployment
 
 For the deployment of the model, we created a simple Flask API. In effect, it loads the model and predicts a sentence when receiving a request. The API was Dockerized and published on Docker Hub. We imported this Docker Container regrouping the Flask API with the model on an Azure Container created for this purpose. The API is located at the public address http://51.103.156.182/. Predictions can be made through a request with the "text" query param as KEY and the sentence as VALUE on the address: http://51.103.156.182/api/predict. Be careful, the container does not run constantly to avoid high costs, and the public address may be updated/changed in the future. If this is the case and there is a need to test it, you should write us an email, and we will quickly respond to any of your enquiries.
