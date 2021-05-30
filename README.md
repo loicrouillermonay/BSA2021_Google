@@ -274,10 +274,10 @@ _Nota bene: the model weights more than 400Mo, and therefore can't be uploaded o
 
 2) Once we developed the web interface, we decided to use Heroku (a PaaS) to host the frontend for free, thanks to their Free-tier service. In a few commands in the terminal, which are also listed in ```DOCUMENTATION.md```, the ```/frontend``` folder as well as all the necessary dependencies are installed and then deployed in a Heroku style container (in the same way as Docker) and are put online at the address: https://lingorank-frontend.herokuapp.com/
 
+
 <div align="middle">
 <img src="/documents/Animation.gif" alt="Animation" width = 50%>
 </div>
-
 
 ### 6.3 Model and Model Evaluation overal summary
 
