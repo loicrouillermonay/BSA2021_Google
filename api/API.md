@@ -77,4 +77,4 @@ Returns the predicted difficulty of each word of a text input and the original t
 
   - **Code:** 200 <br />
     **Content:** `{"difficulty":"[CEFR_LEVELS]","text":"INPUT"}` <br />
-    with _CEFR_LEVELS_ the level of difficulty of each word from _INPUT_ according to the [Council of Europe](https://www.coe.int/en/web/common-european-framework-reference-languages/table-1-cefr-3.3-common-reference-levels-global-scale])
+    with _CEFR_LEVELS_ a list of the level of difficulty for each word from _INPUT_ according to the [Council of Europe](https://www.coe.int/en/web/common-european-framework-reference-languages/table-1-cefr-3.3-common-reference-levels-global-scale])
