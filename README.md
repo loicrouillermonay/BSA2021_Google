@@ -272,11 +272,11 @@ _Nota bene: the model weights more than 400Mo, and therefore can't be uploaded o
 
 1) For the frontend, we use the open-source library 'streamlit', which allows us to create data science web applications easily. A simple yet efficient layout can be built in a few lines to allow users to enter French sentences. Those sentences are then sent to the API, which will return their difficulty and show it on the screen for the users. Additionally, right after that, another API call is sent to retrieve the difficulty of each word, which will be displayed according to a color code on the web page.
 
+2) Once we developed the web interface, we decided to use Heroku (a PaaS) to host the frontend for free, thanks to their Free-tier service. In a few commands in the terminal, which are also listed in ```DOCUMENTATION.md```, the ```/frontend``` folder as well as all the necessary dependencies are installed and then deployed in a Heroku style container (in the same way as Docker) and are put online at the address: https://lingorank-frontend.herokuapp.com/
+
 <div align="middle">
 <img src="/documents/Animation.gif" alt="Animation" width = 50%>
 </div>
-
-2) Once we developed the web interface, we decided to use Heroku (a PaaS) to host the frontend for free, thanks to their Free-tier service. In a few commands in the terminal, which are also listed in ```DOCUMENTATION.md```, the ```/frontend``` folder as well as all the necessary dependencies are installed and then deployed in a Heroku style container (in the same way as Docker) and are put online at the address: https://lingorank-frontend.herokuapp.com/
 
 
 ### 6.3 Model and Model Evaluation overal summary
